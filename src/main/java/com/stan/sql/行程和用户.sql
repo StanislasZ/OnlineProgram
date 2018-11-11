@@ -15,6 +15,22 @@
 | 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
 +----+-----------+-----------+---------+--------------------+----------+
 
+
+create table Trips_262(
+  Id int(10),
+  Client_Id int(10),
+  Driver_Id int(10),
+  City_Id int,
+  Status enum('completed','cancelled_by_driver','cancelled_by_client'),
+  Request_at date
+
+)
+
+
+
+
+
+
 # Users 表存所有用户。每个用户有唯一键 Users_Id。
 Banned 表示这个用户是否被禁止，Role 则是一个表示（‘client’, ‘driver’, ‘partner’）的枚举类型。
 +----------+--------+--------+
@@ -30,6 +46,18 @@ Banned 表示这个用户是否被禁止，Role 则是一个表示（‘client�
 |    13    |   No   | driver |
 +----------+--------+--------+
 
+create table Users_262(
+  Users_ID int,
+  Banned varchar(10),
+  Role enum('client','driver','partner'),
+
+  foreign key(Users_ID) references Trips_262(Client_Id)
+
+
+);
+
+
+
 写一段 SQL 语句查出 2013年10月1日 至 2013年10月3日 期间非禁止用户的取消率。
 基于上表，你的 SQL 语句应返回如下结果，取消率（Cancellation Rate）保留两位小数。
 +------------+-------------------+
@@ -40,12 +68,10 @@ Banned 表示这个用户是否被禁止，Role 则是一个表示（‘client�
 | 2013-10-03 |       0.50        |
 +------------+-------------------+
 
-create table Trips_262(
-  Id int,
-  RecordDate Date,
-  Temperature int
+alter table Users_262
+add constraint fk_users_trips
+foreign key(Users_ID) references Trips_262(Client_Id);
 
-);
 
 
 
