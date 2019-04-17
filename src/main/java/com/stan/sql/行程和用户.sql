@@ -31,6 +31,7 @@ create table Trips_262(
 
 
 
+
 # Users 表存所有用户。每个用户有唯一键 Users_Id。
 Banned 表示这个用户是否被禁止，Role 则是一个表示（‘client’, ‘driver’, ‘partner’）的枚举类型。
 +----------+--------+--------+

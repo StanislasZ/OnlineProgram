@@ -1,7 +1,17 @@
 package com.stan.algorithm;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class 合并两个有序链表 {
     public static void main(String[] args){
+
+
+        List<Integer> list1 = new ArrayList<>();
+        List list2 = list1;
+        list2.add(4);
+        System.out.println(list1);
 
 
         ListNode l1Head=new ListNode(1);

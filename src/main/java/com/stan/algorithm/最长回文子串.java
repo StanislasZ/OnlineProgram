@@ -31,22 +31,20 @@ public class 最长回文子串 {
 
         if (s == null || s.length() < 1) return "";
 
-        int start=0;int end=0;
-        int len=1;
-        for(int i=0;i<s.length();i++){
-            int len_odd=getExpandLength(s,i,i);
-            int len_even=getExpandLength(s,i,i+1);
-            int len_temp=Math.max(len_odd,len_even);
-            if(len_temp>len){
-                len=len_temp;
-                start=i-(len-1)/2;
-                end=i+len/2;
-
-
+        int start = 0;
+        int end = 0;
+        int len = 1;
+        for(int i = 0; i < s.length(); i++) {
+            int len_odd  = getExpandLength(s, i, i);
+            int len_even = getExpandLength(s, i, i+1);
+            int len_temp = Math.max(len_odd,len_even);
+            //下面的操作能适应奇偶
+            if(len_temp > len) {
+                len = len_temp;
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
-
         }
-
         return s.substring(start,end+1);   //[start,end]=[start,end+1)
 
     }
@@ -56,18 +54,18 @@ public class 最长回文子串 {
 
         if(right_index>=s.length()) return 0;
 
-        while(left_index>=0&&right_index<s.length()){
+        while(left_index >= 0 && right_index < s.length()) {
 
-            if(s.charAt(left_index)==s.charAt(right_index)){
+            if(s.charAt(left_index) == s.charAt(right_index)) {
                 left_index--;
                 right_index++;
-            }else{
+            }else {
                 break;  //不写这个else陷入死循环，  或者把上面的if写进while条件里
             }
 
 
         }
-        return right_index-left_index+1-2;    //
+        return right_index-left_index+1-2;    //出循环时一左一右不对应，应减去
 
     }
 

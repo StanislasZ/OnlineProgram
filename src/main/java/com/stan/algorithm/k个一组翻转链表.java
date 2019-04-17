@@ -26,38 +26,28 @@ class Solution_25 {
 
 
 
-    public ListNode reverseKGroup_fuxi(ListNode head,int k){
+    public ListNode reverseKGroup_fuxi(ListNode head,int k) {
 
-        ListNode currentNode=head;
-        if(currentNode==null||k<0) return head;
-        int count=0;
-        while(currentNode!=null&&count<k){
+        ListNode currentNode = head;
+        if (currentNode == null || k<0) return head;
+        int count = 0;
+        while (currentNode != null && count < k) {
             count++;
-            currentNode=currentNode.next;
+            currentNode = currentNode.next;
         }
-        if(count==k){
-            currentNode=reverseKGroup_fuxi(currentNode,k);  //递归调用
+        //前面几组都是k个，翻转，最后面可能不够，不用操作
+        if (count == k) {
+            currentNode = reverseKGroup_fuxi(currentNode, k);  //递归调用
 
-            while(count>0){
-
-                ListNode temp=head.next; //backup
-                head.next=currentNode;
-
-                currentNode=head;
-                head=temp;
-
-
-
-
+            while (count > 0) {
+                ListNode temp = head.next; //backup
+                head.next = currentNode;
+                currentNode = head;
+                head = temp;
                 count--;
             }
-            head=currentNode;
-
-
-
+            head = currentNode;
         }
-
-        //count!=k, 则不用reverse， head不用修改
         return head;
 
     }
@@ -83,7 +73,7 @@ class Solution_25 {
             count++;
         }
         if (count == k){ // if k+1 node is found
-            //递归，从[k+1，到最后]reverse  ，返回reverse后的第一个
+
             currentNode = reverseKGroup(currentNode, k); // reverse list with k+1 node as head
             while (count-- > 0){ // reverse current k-group:
                 ListNode temp = head.next;  //下一句要改head的next， 这里先保存head的原来的next

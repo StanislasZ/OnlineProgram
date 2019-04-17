@@ -47,9 +47,10 @@ class Solution_24 {
         if(head==null) return null;
         if(head.next==null) return head;
 
-        ListNode temp=head.next;
-        head.next=swapPairs(temp.next);  //第一个指向第三个 （递归）
-        temp.next=head;     //第二个指向第一个
+        ListNode temp = head.next;//本来的第二个
+
+        head.next = swapPairs(temp.next);  //第一个指向第三个 （递归）
+        temp.next = head;     //第二个指向第一个
 
         return temp;
     }

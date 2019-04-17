@@ -1,6 +1,6 @@
 package com.stan.algorithm;
 
-public class 字符串转整数 {
+public class    字符串转整数 {
     public static void main(String[] args){
 
         /*

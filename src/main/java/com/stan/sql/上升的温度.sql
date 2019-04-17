@@ -39,3 +39,10 @@ where b.Temperature > a.Temperature;
 
 
 
+-- select tb_copy.copy_id, tb_copy.copy_name, (select count(g.role_id) from tb_game as g, tb_copy as c where g.game_id = c.game_id)/(select count(role_id) from tb_login) as ratio
+-- from  tb_copy, tb_login, tb_game
+-- order by ratio desc
+
+
+
+
