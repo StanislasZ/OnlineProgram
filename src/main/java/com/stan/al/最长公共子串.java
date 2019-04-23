@@ -3,6 +3,10 @@ package com.stan.al;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 看lintcode的LCS 这里写的大便一样的
+ */
 public class 最长公共子串 {
 
     public static void main(String[] args){

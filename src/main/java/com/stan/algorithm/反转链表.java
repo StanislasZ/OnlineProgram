@@ -25,13 +25,13 @@ class Solution_206 {
     public ListNode reverse(ListNode head) {
         if (head.next == null) {
             newHead = head;
-            return newHead;
+            return head;
         }
         else {
             ListNode n = reverse(head.next);
             n.next = head;  //尾的下一个是头
             n = n.next; //现在的尾应该头了
-            n.next = null; //现在的尾的next必须设null
+            //n.next = null; //现在的尾的next必须设null
             return n; //返回现在的尾
         }
     }
@@ -41,7 +41,8 @@ class Solution_206 {
         if (head == null) return null;
         if (head.next == null) return head;
 
-        reverse(head);
+        ListNode tail = reverse(head);
+        tail.next = null;
         return newHead;
     }
 
