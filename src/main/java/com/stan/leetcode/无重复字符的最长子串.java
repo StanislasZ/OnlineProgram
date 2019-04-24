@@ -37,6 +37,39 @@ public class 无重复字符的最长子串 {
 
     }
 
+    /**
+     * 用map存，一旦发现当前的在map中，head跳到对应的值+1，并删除之间的key
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring3(String s) {
+        int head = 0;
+        int tail = 0;
+        int rlt = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] arr = s.toCharArray();
+
+        while (tail < arr.length) {
+            if (map.containsKey(arr[tail])) {
+
+                int index = map.get(arr[tail]);
+                for (int k = head; k <= index; k++) {
+                    map.remove(arr[k]);
+                }
+                head = index + 1;
+
+            }
+
+            map.put(arr[tail], tail);
+            rlt = Math.max(rlt, tail - head + 1);
+            tail++;
+
+
+        }
+        return rlt;
+    }
+
+
 
     /**
      * 使用 HashSet 将字符存储在当前窗口 [i, j)（最初 j = i）中。
