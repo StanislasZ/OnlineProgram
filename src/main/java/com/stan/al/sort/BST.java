@@ -1,7 +1,5 @@
 package com.stan.al.sort;
 
-import com.stan.algorithm.TreeNode;
-
 import java.util.*;
 
 public class BST<K extends Comparable<K>, V> {
