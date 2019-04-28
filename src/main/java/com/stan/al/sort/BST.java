@@ -306,6 +306,8 @@ public class BST<K extends Comparable<K>, V> {
 
         System.out.println("depth is "+ bst.depth());
 
+        System.out.println("select 3 is " + bst.select(0));
+
     }
 
 

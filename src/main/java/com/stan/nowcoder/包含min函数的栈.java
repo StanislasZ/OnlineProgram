@@ -10,7 +10,7 @@ public class 包含min函数的栈 {
      * （时间复杂度应为O（1））。
      */
 }
-public class Solution {
+class Solution_包含min函数的栈 {
 
     Stack<Integer> data_stack = new Stack<>();
     Stack<Integer> min_stack = new Stack<>();
