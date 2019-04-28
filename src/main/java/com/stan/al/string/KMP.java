@@ -20,16 +20,18 @@ public class KMP {
 
 
         String pattern = "aabb";
-        String text = "abcaabbcabcaabb";
+//        String text = "abcaabbcabcaabb";
+        String text = "abcabbcabcaabb";
 
 //        kmp_search(text, pattern);
-//        System.out.println(KMP(text, pattern));
-        KMP2(text, pattern);
+        System.out.println(KMP(text, pattern));
+//        KMP2(text, pattern);
     }
 
     public static void getNext(String pattern, int[] next) {
         next[0] = -1;
         int i = 0, len = -1;
+        //循环内有next[++i]，防止数组越界，i < len - 1
         while (i < pattern.length() - 1) {
 
             if (len == -1 || pattern.charAt(i) == pattern.charAt(len)) {
@@ -55,7 +57,7 @@ public class KMP {
         while (i < len1) {
             if (j == len2 - 1 && text.charAt(i) == pattern.charAt(j)) {
                 System.out.println("Found pattern at " + (i - j));
-                j = next[j];
+                j = next[j];  //不退出，仍继续搜索
             }
 
             if (j == -1 || text.charAt(i) == pattern.charAt(j)) {
@@ -76,8 +78,10 @@ public class KMP {
 
         int len1 = text.length();
         int len2 = pattern.length();
-        while (i < len1 && j < len2) {  //匹配成功后j = len2，退出循环
-
+        while (i < len1) {
+            if (j == len2 - 1 && text.charAt(i) == pattern.charAt(j)) {
+                return i - j;   //匹配到，直接退出
+            }
             if (j == -1 || text.charAt(i) == pattern.charAt(j)) {
                 ++i;
                 ++j;
@@ -85,7 +89,6 @@ public class KMP {
                 j = next[j];   //j回退
             }
         }
-        if (j == len2) return i - j;
         return -1;
     }
 
