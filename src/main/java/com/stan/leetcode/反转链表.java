@@ -30,9 +30,8 @@ class Solution_206 {
         else {
             ListNode n = reverse(head.next);
             n.next = head;  //尾的下一个是头
-            n = n.next; //现在的尾应该头了
-            //n.next = null; //现在的尾的next必须设null
-            return n; //返回现在的尾
+
+            return head; //返回现在的尾
         }
     }
 
@@ -71,7 +70,25 @@ class Solution_206 {
 
 
 
+    //头插法
+    public ListNode reverseList_loop2(ListNode head) {
+        if (head == null) return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
 
+        ListNode left = dummy;
+
+        while (head.next != null) {
+            ListNode temp = head.next;
+            head.next = temp.next;
+            temp.next = left.next;
+            left.next = temp;
+        }
+        return dummy.next;
+    }
+
+
+    //改变指向
     public ListNode reverseList_loop(ListNode head) {
 
         //1->2->3->4->5

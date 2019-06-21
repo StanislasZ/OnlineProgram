@@ -31,7 +31,7 @@ public class Heap {
 
 
     //建堆
-    //就是维护一次
+    //就是从下到上维护一遍
     private static int build_max_heap(Comparable[] a){
 
         int heapSize = a.length;

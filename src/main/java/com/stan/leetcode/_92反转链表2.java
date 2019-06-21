@@ -4,6 +4,47 @@ public class _92反转链表2 {
 }
 class Solution_92 {
 
+
+    /**
+     * 头插法
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetween_2(ListNode head, int m, int n) {
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        //左连接的节点
+        ListNode left_joint = dummy;
+        for (int i = 0; i < m; i++) {
+            left_joint = left_joint.next;
+        }
+
+        /*
+              把head右边一个搬到left_joint右边，head指向原本它的右2
+         */
+
+        head = left_joint.next;   //循环开始的位置
+        for (int i = m; i < n; i++) {
+            ListNode temp = head.next;
+            head.next = temp.next;
+            temp.next = left_joint.next;
+            left_joint.next = temp;
+
+        }
+
+        return dummy.next;
+
+
+
+    }
+
+
+
+
+    //向右改成向左
     //反转前，记录左边连接点，和反转部分反转前的第一个点（反转后的尾）
     //进行部分反转
     //部分反转结束后，获得反转部分的反转后的头，和右边连接点
