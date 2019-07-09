@@ -1,0 +1,11 @@
+/.idea
+pom.xml
+/src/test/
+/leetcode.iml
+/target/
+
+/src/main/java/com/stan/shine_task/
+
+/src/main/java/com/stan/App.java
+/src/main/java/com/stan/test/
+/stan.iml

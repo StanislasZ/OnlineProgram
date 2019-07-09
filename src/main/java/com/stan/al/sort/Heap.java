@@ -24,9 +24,6 @@ public class Heap {
             exch(a, 0, i);
             max_heapify(a, 0, --heapSize);
         }
-
-
-
     }
 
 
