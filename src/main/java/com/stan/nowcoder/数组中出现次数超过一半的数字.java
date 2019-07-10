@@ -4,6 +4,13 @@ public class 数组中出现次数超过一半的数字 {
 
     public static void main(String[] args) {
 
+        /**
+         * 思路：
+         *      如果存在这个数字，那它一定是这个数组排序后，最中间的元素
+         *      1. 先找到第 N/2 大的元素
+         *      2. 验证它的个数
+         */
+
     }
 }
 class Solution_数组中出现次数超过一半的数字 {
