@@ -68,6 +68,7 @@ public class BST<K extends Comparable<K>, V> {
 
     // 找到最小键
     public K min(){
+        if (root == null) return null;
         return min(root).key;
     }
     private Node<K,V> min(Node<K,V> x){
@@ -77,6 +78,7 @@ public class BST<K extends Comparable<K>, V> {
     }
     //找到最大键
     public K max(){
+        if (root == null) return null;
         return max(root).key;
     }
     private Node<K,V> max(Node<K,V> x){
@@ -117,9 +119,18 @@ public class BST<K extends Comparable<K>, V> {
         if (k < left_size) return select(x.left, k);
         else if (k > left_size) return select(x.right, k - left_size - 1); //在右子树
         else return x;
+    }
 
-
-
+    // 返回给定键的排名, 从0开始
+    public int rank(K key) {
+        return rank(root, key);
+    }
+    private int rank(Node<K,V> x, K key) {
+        if (x == null) return 0;
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) return size(x.left);
+        else if (cmp < 0) return rank(x.left, key);
+        else return size(x.left) + 1 + rank(x.right, key);
     }
 
 
@@ -127,10 +138,11 @@ public class BST<K extends Comparable<K>, V> {
 
     // 删除最小键
     public void deleteMin(){
+        if (root == null) return;
         root = deleteMin(root);
     }
     private Node<K,V> deleteMin(Node<K,V> x){
-        //能运行到这里，x肯定不等于null， 左子树为空，就是删自己，即 让右儿子代替自己
+        //左子树为空，就是删自己，即 让右儿子代替自己
         if (x.left == null) return x.right;
         x.left = deleteMin(x.left);
         x.N = size(x.left) + size(x.right) + 1;
@@ -142,6 +154,7 @@ public class BST<K extends Comparable<K>, V> {
     public void delete(K key){
         root = delete(root, key);
     }
+
     private Node<K,V> delete(Node<K,V> x, K key){
 
         if (x == null) return null;
@@ -286,6 +299,8 @@ public class BST<K extends Comparable<K>, V> {
     public static void main(String[] args) {
 
         BST<Integer, Integer> bst = new BST<>();
+        bst.deleteMin();
+        System.out.println(bst.min());
         bst.put(5, 5);
         bst.put(3, 3);
         bst.put(9, 9);
@@ -307,6 +322,8 @@ public class BST<K extends Comparable<K>, V> {
         System.out.println("depth is "+ bst.depth());
 
         System.out.println("select 3 is " + bst.select(0));
+
+        System.out.println(bst.floor(200));
 
     }
 
