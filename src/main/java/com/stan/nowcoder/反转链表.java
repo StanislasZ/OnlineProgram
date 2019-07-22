@@ -50,7 +50,7 @@ public class 反转链表 {
             newHead = curr;  //再让curr成为新头
             curr = temp;  //改变curr，下一个
         }
-        head.next = null;
+        //head.next = null;
         return newHead;
     }
 }
