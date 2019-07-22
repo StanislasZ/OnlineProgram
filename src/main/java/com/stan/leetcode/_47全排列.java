@@ -1,9 +1,6 @@
 package com.stan.leetcode;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class _47全排列 {
     List<List<Integer>> rlt = new ArrayList<>();
@@ -39,6 +36,13 @@ public class _47全排列 {
         }
 
 
+    }
+
+    public void permutation(int[] nums, int cnt) {
+        //递归终点
+        if (cnt == nums.length) {
+
+        }
     }
 
 }
