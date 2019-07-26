@@ -27,6 +27,16 @@ public class 树的子结构 {
 }
 class Solution_树的子结构 {
 
+
+    //递归，更简洁一些，仍使用isSame方法
+    public boolean HasSubtree3(TreeNode root1,TreeNode root2) {
+
+        if (root1 == null || root2 == null) return false;
+        return isSame(root1, root2) || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);
+
+    }
+
+
     //递归写法
     public boolean HasSubtree2(TreeNode root1, TreeNode root2) {
 
@@ -37,6 +47,9 @@ class Solution_树的子结构 {
         if (root1 == null) return false;
         return isSame(root1, target) || pre(root1.left , target) || pre(root1.right, target);
     }
+
+
+
     public boolean isSame(TreeNode root1, TreeNode root2) {
         if (root2 == null) return true;
         if (root1 == null || root1.val != root2.val) return false;
