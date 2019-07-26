@@ -21,7 +21,7 @@ class Solution_35 {
 
 
         while (head <= tail) {
-            int mid = (head + tail) / 2;
+            int mid = (head + tail) >> 1;
             if (nums[mid] < target) {
                 head = mid + 1;
             }else if (nums[mid] > target) {
