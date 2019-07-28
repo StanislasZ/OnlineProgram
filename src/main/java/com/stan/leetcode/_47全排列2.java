@@ -58,21 +58,16 @@ public class _47全排列2 {
         return rlt;
     }
 
-
     private void permutation(int[] nums, int i) {
         //递归终点
         if (i == nums.length) {
             temp.clear();
             for (int ele : nums) temp.add(ele);
-            System.out.println(temp);
             rlt.add(new ArrayList<>(temp));
         }
-
         Set<Integer> set = new HashSet<>();
-
-
         for (int j = i; j < nums.length; j++) {
-
+            //避重
             if (set.contains(nums[j])) continue;
             set.add(nums[j]);
             swap(nums, i, j);
