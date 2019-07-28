@@ -7,7 +7,7 @@ public class _47全排列2 {
     List<Integer> temp = new ArrayList<>();
 
 
-    public List<List<Integer>> permuteUnique(int[] nums) {
+    public List<List<Integer>> permuteUnique2(int[] nums) {
         //先排序
         Arrays.sort(nums);
 
@@ -47,6 +47,44 @@ public class _47全排列2 {
         }
 
 
+    }
+
+    //*****************************************
+    //交换法
+    public List<List<Integer>> permuteUnique(int[] nums) {
+
+        if (nums.length == 0) return rlt;
+        permutation(nums, 0);
+        return rlt;
+    }
+
+
+    private void permutation(int[] nums, int i) {
+        //递归终点
+        if (i == nums.length) {
+            temp.clear();
+            for (int ele : nums) temp.add(ele);
+            System.out.println(temp);
+            rlt.add(new ArrayList<>(temp));
+        }
+
+        Set<Integer> set = new HashSet<>();
+
+
+        for (int j = i; j < nums.length; j++) {
+
+            if (set.contains(nums[j])) continue;
+            set.add(nums[j]);
+            swap(nums, i, j);
+            //因为j从i开始，所以递归进去后，之后改变后面的，前面（索引0到i-1）不动。
+            permutation(nums, i + 1);
+            swap(nums, i, j);
+        }
+    }
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 
 }
