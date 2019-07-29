@@ -63,6 +63,11 @@ public class 字符串的排列 {
             rlt.add(new String(arr));
             return;
         }
+
+        for (char c : arr) System.out.print(c + " ");
+
+        //set只用于下面的for循环，只在当前第i位起作用，进入递归后是全新的set
+        //Arrays.sort(arr, i+1, arr.length);
         HashSet<Character> set = new HashSet<>();
         for (int j = i; j < arr.length; j++) {
             if (!set.contains(arr[j])) {
