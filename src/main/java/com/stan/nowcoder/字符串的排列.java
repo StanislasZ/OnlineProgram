@@ -2,19 +2,20 @@ package com.stan.nowcoder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class 字符串的排列 {
 
     public static void main(String[] args) {
-        System.out.println(new 字符串的排列().Permutation("ab"));
+        System.out.println(new 字符串的排列().Permutation("abc"));
     }
 
     private ArrayList<String> rlt = new ArrayList<>();
     private boolean[] vis;
     private char[] temp;
 
-    public ArrayList<String> Permutation(String str) {
+    public ArrayList<String> Permutation2(String str) {
         if (str.length() == 0) return rlt;
 
         char[] arr = str.toCharArray();
@@ -51,10 +52,11 @@ public class 字符串的排列 {
      * @param str
      * @return
      */
-    public ArrayList<String> Permutation2(String str) {
+    public ArrayList<String> Permutation(String str) {
         char[] arr = str.toCharArray();
         Arrays.sort(arr);
         Permutation(arr, 0);
+        Collections.sort(rlt);
         return rlt;
 
     }
@@ -64,17 +66,15 @@ public class 字符串的排列 {
             return;
         }
 
-        for (char c : arr) System.out.print(c + " ");
 
-        //set只用于下面的for循环，只在当前第i位起作用，进入递归后是全新的set
-        //Arrays.sort(arr, i+1, arr.length);
-        HashSet<Character> set = new HashSet<>();
-        for (int j = i; j < arr.length; j++) {
-            if (!set.contains(arr[j])) {
-                swap(arr, i, j);
-                Permutation(arr, i + 1);
-                swap(arr, i, j);
-            }
+        //Arrays.sort(arr, i, arr.length);
+
+        for (int j = i; j < arr.length; ++j) {
+           if (j != i && arr[j] == arr[i]) continue;
+            swap(arr, i, j);
+            Permutation(arr, i + 1);
+            swap(arr, i, j);
+
         }
 
     }
@@ -83,5 +83,11 @@ public class 字符串的排列 {
         char temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    private void printArray(char[] arr) {
+        for (char c : arr) System.out.print(c);
+        System.out.println();
+
     }
 }
