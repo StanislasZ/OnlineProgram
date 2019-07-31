@@ -22,7 +22,7 @@ public class 数值的整数次方 {
         while (e > 0) {
             if ((e & 1) == 1) //奇数
                 res = res * curr;    //原来的数二进制为1的位就是不停右移时的最低位=1
-            curr = curr * curr;
+            curr = curr * curr;  //curr = base, base的2次，base的4次......
             e = e >> 1;
 
         }
