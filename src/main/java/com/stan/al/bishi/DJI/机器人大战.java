@@ -36,7 +36,7 @@ public class 机器人大战 {
             }
 
 
-            //第0个点到第0个点是0， 不通的设为int最小值
+            //第0个点到第0个点是0， 不通的设为-1
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
                     if (i != j && pass[i][j] == 0) {
@@ -49,14 +49,10 @@ public class 机器人大战 {
 
             int res = 0;
             int a = 0;
-
             while (a < C) {
                 rlt = Integer.MAX_VALUE;
                 int target = request[a++];
-                System.out.println("target = " + target);
-
                 dfs(target, 0, 0, 0);
-
                 res = res + rlt;
 
             }
