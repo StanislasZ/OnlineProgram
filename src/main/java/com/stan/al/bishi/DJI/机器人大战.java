@@ -70,10 +70,10 @@ public class 机器人大战 {
 
     /**
      * dfs + 回溯
-     * @param target
-     * @param pre
-     * @param curr
-     * @param cnt
+     * @param target ：目标位置索引
+     * @param pre ： 上个点的索引
+     * @param curr： 这个点的索引
+     * @param cnt： 已经走过路程之和（不包括pre->curr这段路）
      */
     private static void dfs(int target, int pre, int curr, int cnt) {
 
