@@ -1,6 +1,6 @@
 package com.stan.leetcode;
 
-public class 两两交换链表中的节点 {
+public class _24两两交换链表中的节点 {
     public static void main(String[] args){
 
         /*
@@ -53,5 +53,38 @@ class Solution_24 {
         temp.next = head;     //第二个指向第一个
 
         return temp;
+    }
+
+
+    /**
+     * 循环，头插法
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummy = new ListNode(0);
+
+        ListNode h = head;   //这一段的头
+        ListNode pre = dummy;   //前一段的尾
+
+
+        //头插
+        while (h != null && h.next != null) {
+            ListNode curr = h.next; //第二个开始头插
+
+            ListNode temp = curr.next;  //备份
+
+            pre.next = curr;
+            curr.next = h;
+            h.next = temp;
+
+
+
+            pre = h;   //上一段的尾->这一段处理后的头
+            h = temp;  //下一段的头，进入下一次循环
+        }
+        return dummy.next;
     }
 }
