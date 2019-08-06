@@ -1,4 +1,4 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 import java.util.HashSet;
 import java.util.Scanner;

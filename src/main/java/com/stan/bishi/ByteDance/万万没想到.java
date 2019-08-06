@@ -1,9 +1,8 @@
-package com.stan.al.bishi.ByteDance;
+package com.stan.bishi.ByteDance;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class 万万没想到 {
 

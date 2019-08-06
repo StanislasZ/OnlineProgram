@@ -1,4 +1,4 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 public class 有序数组中的缺失元素 {
     public static void main(String[] args) {

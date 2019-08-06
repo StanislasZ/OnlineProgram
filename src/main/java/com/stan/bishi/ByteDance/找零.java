@@ -1,4 +1,4 @@
-package com.stan.al.bishi.ByteDance;
+package com.stan.bishi.ByteDance;
 
 import java.util.Scanner;
 

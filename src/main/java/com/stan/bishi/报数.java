@@ -1,7 +1,6 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class 报数 {

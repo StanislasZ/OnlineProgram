@@ -1,4 +1,4 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 import java.util.ArrayList;
 import java.util.Collections;

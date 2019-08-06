@@ -1,9 +1,7 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class 最长重复子串 {
 

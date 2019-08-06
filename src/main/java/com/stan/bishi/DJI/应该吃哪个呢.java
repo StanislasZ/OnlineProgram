@@ -1,4 +1,4 @@
-package com.stan.al.bishi.DJI;
+package com.stan.bishi.DJI;
 
 import java.util.ArrayList;
 import java.util.Comparator;

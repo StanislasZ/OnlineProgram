@@ -1,7 +1,5 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class 跳格子 {

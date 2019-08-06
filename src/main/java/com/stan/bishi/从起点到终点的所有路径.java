@@ -1,4 +1,4 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 public class 从起点到终点的所有路径 {
     public static void main(String[] args) {

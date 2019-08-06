@@ -1,9 +1,7 @@
-package com.stan.al.bishi;
+package com.stan.bishi;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class 按字典序排列最小的等效字符串 {
     public static void main(String[] args) {
