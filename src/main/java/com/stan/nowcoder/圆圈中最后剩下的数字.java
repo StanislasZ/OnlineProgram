@@ -14,7 +14,7 @@ class Solution_圆圈中最后剩下的数字 {
         isOut = new boolean[n];
 
         //可知循环n次，全部滚蛋，curr为最后一个滚的人的索引
-        int curr = -1;  //当前小孩的索引， 也可以取 n - 1
+        int curr = -1;  //当前小孩的索引， 也可以取 n - 1 ，使getNext curr++后 = 0即可
         for (int i = 1; i <= n; ++i) {
             curr = getNext(curr, n, m);
             isOut[curr] = true;
