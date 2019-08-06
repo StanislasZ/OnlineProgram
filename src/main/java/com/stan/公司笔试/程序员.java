@@ -1,4 +1,4 @@
-package com.stan.bishi;
+package com.stan.公司笔试;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package com.stan.bishi;
+package com.stan.公司笔试;
 
 public class 形成字符串的最短路径 {
     public static void main(String[] args) {
