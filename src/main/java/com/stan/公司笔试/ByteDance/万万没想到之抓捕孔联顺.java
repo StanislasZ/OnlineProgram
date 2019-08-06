@@ -4,7 +4,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class 万万没想到 {
+public class 万万没想到之抓捕孔联顺 {
 
     /*
         万万没想到之抓捕孔连顺
@@ -27,7 +27,7 @@ public class 万万没想到 {
         for (int i = 0; i < N; ++i) {
             position[i] = scanner.nextInt();
         }
-        Solution_万万没想到 s = new Solution_万万没想到();
+        Solution_万万没想到之抓捕孔联顺 s = new Solution_万万没想到之抓捕孔联顺();
         s.dfs(-1, 0, D, position, deque);
 
         System.out.println(s.res);
@@ -37,7 +37,7 @@ public class 万万没想到 {
 }
 
 
-class Solution_万万没想到 {
+class Solution_万万没想到之抓捕孔联顺 {
     long res = 0;
 
 
