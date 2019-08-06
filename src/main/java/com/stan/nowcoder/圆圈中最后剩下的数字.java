@@ -23,7 +23,7 @@ class Solution_圆圈中最后剩下的数字 {
     }
 
     /**
-     *
+     * 获取下一个滚蛋的人的索引
      * @param curr: 上次滚蛋的人的索引
      * @param n ： n个人
      * @param m ： 从1报数到m 某个人滚蛋
