@@ -38,8 +38,7 @@ public class 字符串的排列 {
                 vis[j] = true;
                 //第i位用过哪些数字，加进去，通过if里的判断保证第i位用过的数字不重复
                 set.add(arr[j]);
-                dfs(arr, ++i);
-                --i;
+                dfs(arr, i + 1);
                 //回溯
                 vis[j] = false;
             }
