@@ -1,8 +1,5 @@
-package com.stan.公司笔试.ByteDance;
+package com.stan.公司笔试.DJI;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
 
 public class 爱玩游戏的小J {
