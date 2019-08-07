@@ -14,18 +14,18 @@ public class 背包问题 {
      */
     int zeroOneKnapsackByTwoDimesion(int[] weight, int[] value, int vol) {
         int N = weight.length - 1;  //物品真实数量
-        int[][] dp = new int[weight.length][vol + 1];
+        int[][] dp = new int[N + 1][vol + 1];
         for (int i = 1; i <= N; ++i) {
             for (int j = 1; j <= vol ; ++j) {
                 //当前物品比背包容量还大
                 if (weight[i] > j)
                     dp[i][j] = dp[i - 1][j];
                 else
-                    dp[i][j] =
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
+
             }
         }
-
-
+        return dp[N][vol];
     }
 
     public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class 背包问题 {
         int n = 5, w = 10;                    //物品个数，背包容量
         int[] value = {0, 6, 3, 5, 4, 6};     //各个物品的价值
         int[] weight = {0, 2, 2, 6, 5, 4};    //各个物品的重量
-
+        System.out.println(new 背包问题().zeroOneKnapsackByTwoDimesion(weight, value, w));
 
     }
 
