@@ -43,11 +43,8 @@ class Solution_两个链表的第一个公共结点 {
         ListNode p2 = pHead2;
 
         while (p1 != p2) {
-
-            if (p1 == null) p1 = pHead2;   //不知不觉已经前进了，所以不能再p1 = p1.next
-            else p1 = p1.next;
-            if (p2 == null) p2 = pHead1;
-            else p2 = p2.next;
+            p1 = p1 == null? pHead2 : p1.next;
+            p2 = p2 == null? pHead1 : p2.next;
         }
         return p1;
     }
