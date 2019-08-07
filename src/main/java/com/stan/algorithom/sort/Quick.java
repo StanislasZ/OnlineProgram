@@ -1,6 +1,6 @@
-package com.stan.al.sort;
+package com.stan.algorithom.sort;
 
-import com.stan.al.utils.ArrayUtils;
+import com.stan.algorithom.utils.ArrayUtils;
 
 
 

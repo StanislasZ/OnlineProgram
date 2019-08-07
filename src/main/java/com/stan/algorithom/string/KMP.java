@@ -1,4 +1,4 @@
-package com.stan.al.string;
+package com.stan.algorithom.string;
 
 public class KMP {
 

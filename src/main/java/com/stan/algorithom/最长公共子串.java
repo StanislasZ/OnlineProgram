@@ -1,4 +1,4 @@
-package com.stan.al;
+package com.stan.algorithom;
 
 import java.util.ArrayList;
 import java.util.List;

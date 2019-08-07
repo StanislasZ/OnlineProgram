@@ -1,4 +1,4 @@
-package com.stan.al.sort;
+package com.stan.algorithom.sort;
 
 
 /**

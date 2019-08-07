@@ -1,4 +1,4 @@
-package com.stan.新特性.泛型;
+package com.stan.java部分.泛型;
 
 public class 上界和下界 {
 

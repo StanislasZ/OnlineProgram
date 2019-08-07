@@ -1,6 +1,4 @@
-package com.stan.al.sort;
-
-import sun.plugin.com.event.COMEventHandler;
+package com.stan.algorithom.sort;
 
 public class Merge {
 

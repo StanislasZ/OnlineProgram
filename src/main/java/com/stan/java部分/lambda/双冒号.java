@@ -1,4 +1,4 @@
-package com.stan.al.lambda;
+package com.stan.java部分.lambda;
 
 import java.util.Arrays;
 import java.util.List;

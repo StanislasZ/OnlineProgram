@@ -1,4 +1,4 @@
-package com.stan.al.utils;
+package com.stan.algorithom.utils;
 
 import java.util.Arrays;
 import java.util.Random;

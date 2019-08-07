@@ -1,4 +1,4 @@
-package com.stan.al.动态规划;
+package com.stan.algorithom.动态规划;
 
 public class 背包问题 {
 

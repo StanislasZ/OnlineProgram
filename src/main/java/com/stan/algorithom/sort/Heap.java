@@ -1,7 +1,5 @@
-package com.stan.al.sort;
+package com.stan.algorithom.sort;
 
-
-import com.stan.al.utils.ArrayUtils;
 
 /**
  * 堆排序
