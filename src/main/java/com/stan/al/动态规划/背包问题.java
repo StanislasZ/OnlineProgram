@@ -28,6 +28,30 @@ public class 背包问题 {
         return dp[N][vol];
     }
 
+    /**
+     * 0-1 背包一维空间解法
+     *
+     * @param weight
+     * @param value
+     * @param vol
+     * @return
+     */
+    public int zeroOneKnapsackByOneDimesion(int[] weight, int[] value, int vol) {
+
+        int N = weight.length - 1;  //物品真实数量;
+        int[] dp = new int[vol + 1];
+
+        for (int i = 1; i <= N; ++i) {
+            for (int j = vol; j >= 1; --j) {
+                if (weight[i] < j)
+                    dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+            }
+        }
+        return dp[vol];
+
+    }
+
+
     public static void main(String[] args) {
 
         int n = 5, w = 10;                    //物品个数，背包容量

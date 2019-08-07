@@ -81,7 +81,7 @@ public class 爱玩游戏的小J {
                 //如果这个游戏要的时间比当前给的总时间j还大，那就不玩
                 if (time[i] > j) dp[i][j] = dp[i - 1][j];
                 // 否则，比较玩与不玩的情况
-                else dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - time[i]] + cj[i]);
+                else dp[i][j] = Math.max(dp[i - 1][j - time[i]] + cj[i], dp[i - 1][j]);
             }
         }
         return dp[N - 1][X];
