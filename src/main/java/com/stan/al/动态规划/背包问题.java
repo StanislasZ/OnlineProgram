@@ -41,7 +41,12 @@ public class 背包问题 {
         int N = weight.length - 1;  //物品真实数量;
         int[] dp = new int[vol + 1];
 
+        // 二维情况下 dp[i][j] 只与 dp[i - 1][k] 有关, 其中 k <= j
+        // 当dp[i - 1] 计算完之后， 直接在其状态上更新即可, 而且每次都应该从右至左遍历
+        // 因为要保证左边状态是上一层保留下来的
         for (int i = 1; i <= N; ++i) {
+
+            // 注意第二层循环逆序
             for (int j = vol; j >= 1; --j) {
                 if (weight[i] <= j)
                     dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
@@ -92,7 +97,15 @@ public class 背包问题 {
         int N = weight.length - 1; //物品真实数量
         int[] dp = new int[vol + 1];
 
+        // 完全背包，如果利用 01 背包的思路可以将 三重循环 降低为 二重
+        // 考虑已经计算得到了前 i - 1 个物品在背包容量 0 ~ vol 的最优解
+        // 如果要加入第 i 个物品，显然循环起点应该在 w[i]， 因为如果 w[i] > j, 背包放不进去
+        // 即，当 j = 0 ~ w[i] - 1时，加入第 i 个物品的最优解应该与前 i - 1 个物品的解保持一致， 即不放它进去
+        // 当 j = w[i] ~ vol 时，背包可以放入第 i 个物品，而且在容量比较大时可以持续放入多个
+        // 因此，内循环应该是正序的，因为需要与当前层进行比较
+        // 比如，放进 2 个第 i 个商品时，要比较与放入 1 个第 i 个商品哪种更优
         for (int i = 1; i <= N ; ++i) {
+            // 第二层正序
             for (int j = weight[i]; j <= vol ; ++j) {
                 dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
             }
