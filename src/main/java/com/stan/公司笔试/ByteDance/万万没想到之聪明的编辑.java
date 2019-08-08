@@ -91,7 +91,7 @@ class Solution_万万没想到之聪明的编辑 {
 
 
     }
-
+    //获取第一个与arr[curr]不同的索引
     private int getNextDifferent(char[] arr, int curr) {
         if (curr >= arr.length) return arr.length;
         int next = curr + 1;
