@@ -47,7 +47,7 @@ public class 万万没想到之聪明的编辑 {
         for (int i = 0; i < arr.length; ++i) {
             arr[i] = scanner.nextLine();
             //System.out.println("原字符串 = " + arr[i]);
-            System.out.println(s.process(arr[i]));
+            System.out.println(s.process2(arr[i]));
         }
         scanner.close();
 
@@ -57,6 +57,37 @@ public class 万万没想到之聪明的编辑 {
 
 class Solution_万万没想到之聪明的编辑 {
 
+    /**
+     * 抄的
+     * @param str
+     * @return
+     */
+    public String process2(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+
+            //...aa再来个a不append
+            if (sb.length() >= 2) {
+                if (c == sb.charAt(sb.length() - 1) && c == sb.charAt(sb.length() - 2))
+                    continue;
+            }
+
+            //...aab再来个b不append
+            if (sb.length() >= 3) {
+                if (c == sb.charAt(sb.length() - 1) && sb.charAt(sb.length() - 2) == sb.charAt(sb.length() - 3))
+                    continue;
+            }
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+
+    /**
+     * 自己写的，垃圾
+     * @param str
+     * @return
+     */
     public String process(String str) {
 
         char[] arr = str.toCharArray();
