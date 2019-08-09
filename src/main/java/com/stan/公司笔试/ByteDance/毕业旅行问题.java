@@ -33,25 +33,18 @@ public class 毕业旅行问题 {
      * @param cost: 已经花费的钱（不包括上个点到这个点的花费）
      */
     public void dfs(int pre, int curr, int cnt,int total, int cost) {
-        //先走完这一步
-        vis[curr] = true;
-        ++ cnt;
-        cost += price[pre][curr];
-
+        cost += price[pre][curr]; //加上pre->curr这段费用
         //递归终点
-        if (cnt == total) {
-            cost += price[curr][0];
-            res = Math.min(res, cost);
+        if (++cnt == total) {
+            res = Math.min(res, cost + price[curr][0]);
             return ;
         }
-
-        for (int i = 0; i < total; ++i) {
+        for (int i = 1; i < total; ++i) {
             if (!vis[i]) {
+                vis[i] = true;
                 dfs(curr, i, cnt, total, cost);
-                vis[i] = false;
-
+                vis[i] = false;  //回溯
             }
         }
-
     }
 }
