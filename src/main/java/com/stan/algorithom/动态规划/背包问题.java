@@ -71,8 +71,6 @@ public class 背包问题 {
         int[][] dp = new int[N + 1][vol + 1];
         for (int i = 1; i <= N; ++i) {
             for (int j = 1; j <= vol; ++j) {
-                //加一层数量循环
-                dp[i][j] = dp[i - 1][j];
                 //01背包在这里 要么取1个 ，要么不取 ， 取两种情况的最大值
                 //完全背包就从0到k个 逐个尝试一遍，取最大值
                 for (int k = 0; k <= j / weight[i]; ++k) {
@@ -122,6 +120,9 @@ public class 背包问题 {
         int[] weight = {0, 2, 2, 6, 5, 4};    //各个物品的重量
         System.out.println(new 背包问题().zeroOneKnapsackByTwoDimesion(weight, value, w));
         System.out.println(new 背包问题().zeroOneKnapsackByOneDimesion(weight, value, w));
+        System.out.println(new 背包问题().completeKnapsackByTwoDimesion(weight, value, w));
+        System.out.println(new 背包问题().completeKnapsackByOneDimesion(weight, value, w));
+
     }
 
 }
