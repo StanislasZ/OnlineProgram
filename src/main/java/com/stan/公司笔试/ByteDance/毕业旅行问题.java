@@ -21,7 +21,69 @@ public class 毕业旅行问题 {
         solution.dfs(0,0, 0, n, 0);
         System.out.println(solution.res);
 
+        System.out.println(solution.dp(n));
+
+
+        System.out.println(2 >> -1);
+        System.out.println(4 >> -1);
+
+
     }
+
+    /**
+     * dp[i][j]
+     * @param n
+     * @return
+     */
+    public int dp(int n) {
+        int V = 1 << (n - 1);
+        int[][] dp = new int[n][V];
+        for (int i = 0; i < n; ++i) {
+            dp[i][0] = price[i][0];  //初始化, 起点到每个城市的距离
+        }
+
+        for (int j = 1; j < V; ++j) {
+            for (int i = 0; i < n; ++i) {
+
+                dp[i][j] = 100000;
+                //低i-1位是否为1
+                System.out.println("j = " + j + ", i = " + i + ", j >> (i - 1) = " +(j >> (i-1)));
+                if (((j >> (i-1)) & 1) == 1) {  //已经去过i这个城市
+                    continue;
+                }
+                //遍历所有去过的城市，从他们到i，取最小值
+                for (int k = 1; k < n; ++k) {
+                    //j的二进制从右边数第k - 1位 为 1
+                    if(((j >> (k-1)) & 1) == 1) {
+                        dp[i][j] = Math.min(dp[i][j], dp[k][j ^ (1 << (k - 1))] + price[i][k]);
+                    }
+                }
+            }
+        }
+        printDp(dp);
+        return  dp[0][(1 << (n - 1)) - 1];
+    }
+
+    private void printDp(int[][] dp) {
+        int n = dp.length;
+
+        System.out.printf("%10d",0);
+        for(int j = 0;j < 1 << (n - 1) ;j++){
+            System.out.printf("%10d",j);
+        }
+        System.out.println();
+        for(int i = 0;i < n;i++){
+            System.out.printf("%10d",i);
+            for(int j = 0;j < 1 << (n - 1) ;j++){
+                if(dp[i][j] == 0x7ffff) dp[i][j] = -1;
+                System.out.printf("%10d",dp[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+
+
 
 
     /**
