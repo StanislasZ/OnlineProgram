@@ -22,19 +22,24 @@ public class 游泳池管理员 {
             int time = 1;
             int vol = 0;
             int pre = 0;
+
+
             while (time  <= t) {
+                //不是t1的倍数，也不是t2的倍数，也不等于t
                 if ((time % t1 != 0 && time % t2 != 0) && time != t) {
                     ++ time;
                     continue;
                 }
+                //pre到time这段时间，进水口状态不变，出水口状态不变
                 int in_speed  = ((int)((time - 0.5) / t1) & 1) == 1? 0 : m1; //pre到time这段时间进水口的速度
                 int out_speed = ((int)((time - 0.5) / t2) & 1) == 1? 0 : m2; //pre到time这段时间出水口的速度
 
                 int speed = in_speed - out_speed;
+                if (speed > 0) vol = Math.min(m, vol + speed * (time - pre));   //最多为m
+                else vol = Math.max(0, vol + speed * (time - pre));             //最少为0
 
-                if (speed > 0) vol = Math.min(m, vol + speed * (time - pre));
-                else vol = Math.max(0, vol + speed * (time - pre));
-                pre = time;  //重置指针
+                //重置指针
+                pre = time;
                 ++ time;
             }
             System.out.println(vol);
