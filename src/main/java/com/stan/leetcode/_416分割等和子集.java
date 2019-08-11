@@ -87,4 +87,42 @@ public class _416分割等和子集 {
 
 
     }
+
+
+
+    private boolean find = false;
+    public boolean canPartition_dfs(int[] nums) {
+
+        int sum = 0;
+        for (int ele : nums) sum += ele;
+        if ((sum & 1) == 1 || nums.length == 1) return false;
+
+        sum = sum >> 1;
+        int N = nums.length;
+
+        dfs(nums, 0, 0, sum);
+        return find;
+
+    }
+
+    public void dfs(int[] nums, int i, int cnt, int sum) {
+        System.out.println("i = " + i + ", cnt = "+cnt + ", len = " + nums.length);
+
+        if (find || i >= nums.length) return;
+        //递归终点
+        if (cnt == sum) {
+            find = true;
+            return;
+        }
+
+        dfs(nums, i + 1, cnt, sum);
+        dfs(nums, i + 1, cnt + nums[i], sum);
+    }
+
+    public static void main(String[] args) {
+
+        int[] nums = new int[]{100,100,100,100,100,100,100,100,100,100,100};
+        //int[] nums = new int[]{100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100};
+        System.out.println(new _416分割等和子集().canPartition_dfs(nums));
+    }
 }
