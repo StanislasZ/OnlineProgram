@@ -11,9 +11,12 @@ public class TCPClient {
 
         String sentence;
         String modifiedSentence;
+        //程序的输入流，从键盘读
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         Socket clientSocket = new Socket("localhost", 6789);
+        //输出流，输出到socket
         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        //输入流，从socket来的流入inFromServer
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         sentence = inFromUser.readLine();
         outToServer.writeBytes(sentence + '\n');
