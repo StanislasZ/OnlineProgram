@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class 序列重组 {
+
+    /*
+        通过36%
+        贪心不对
+     */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int len = scanner.nextInt();

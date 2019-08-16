@@ -9,25 +9,18 @@ public class 立方体表面积 {
         int[][] cube = new int[N][M];
         for (int i = 0; i < N; ++i) for (int j = 0; j < N; ++j)
             cube[i][j] = scanner.nextInt();
-        int res = 0;
+
+        int res = 2 * N * M;  //初始化为顶+底
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
-                for (int k = 0; k < cube[i][j]; ++k) {
-                    int cnt = 0;
-                    //下
-                    if (k == 0) ++ cnt;
-                    //上
-                    if (k == cube[i][j] - 1) ++ cnt;
-                    //前
-                    if (i == 0 || cube[i - 1][j] < k + 1) ++ cnt;
-                    //后
-                    if (i == N - 1 || cube[i + 1][j] < k + 1) ++ cnt;
-                    //左
-                    if (j == 0 || cube[i][j - 1] < k + 1) ++ cnt;
-                    //右
-                    if (j == M - 1 || cube[i][j + 1] < k + 1) ++ cnt;
-                    res += cnt;
-                }
+                //前
+                res = i == 0? res + cube[i][j] : res + Math.max(0, cube[i][j] - cube[i - 1][j]);
+                //后
+                res = i == N - 1? res + cube[i][j] : res + Math.max(0, cube[i][j] - cube[i + 1][j]);
+                //左
+                res = j == 0? res + cube[i][j] : res + Math.max(0, cube[i][j] - cube[i][j - 1]);
+                //右
+                res = j == M - 1? res + cube[i][j] : res + Math.max(0, cube[i][j] - cube[i][j + 1]);
             }
         }
         System.out.println(res);
