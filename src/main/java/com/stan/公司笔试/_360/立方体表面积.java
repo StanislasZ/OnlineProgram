@@ -30,6 +30,8 @@ public class 立方体表面积 {
             cube[i][j] = scanner.nextInt();
 
         int res = 2 * N * M;  //初始化为顶+底
+
+        //想象成高度不同的棍子插在地上，遍历每根棍子即可，不需要遍历棍子的每一截（多一层for）
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
                 //前
