@@ -2,6 +2,25 @@ package com.stan.公司笔试._360;
 
 import java.util.Scanner;
 public class 立方体表面积 {
+
+    /*
+        输入：
+        第一行： N行   M列
+        然后N行
+        每行为对应行列摆放了几个立方体
+
+        输出：表面积
+
+        示例：
+        输入：
+        2 2
+        2 1
+        1 1
+
+        输出：
+        20
+     */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
