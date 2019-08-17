@@ -44,7 +44,6 @@ public class 子串拼成原串 {
      * @return
      */
     public boolean process2(String str, int N) {
-        if (N <= 1) return false;
-        return (str + str).indexOf(str, 1) != N;
+        return N > 1 && (str + str).indexOf(str, 1) != N;
     }
 }
