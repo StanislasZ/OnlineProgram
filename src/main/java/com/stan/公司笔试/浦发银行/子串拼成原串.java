@@ -25,9 +25,9 @@ public class 子串拼成原串 {
      * @return
      */
     public boolean process(String str, int N) {
-        if (N == 1) return true;
+        if (N <= 1) return false;
         String dual = str + str;
-        for (int i = 1; i <= N; ++i) {
+        for (int i = 1; i < N; ++i) {
             if (dual.substring(i, i + N).equals(str)) {
                 System.out.println("子串为" + dual.substring(0, i));
                 return true;
@@ -44,6 +44,7 @@ public class 子串拼成原串 {
      * @return
      */
     public boolean process2(String str, int N) {
-        return N == 1 ||  (str + str).indexOf(str, 1) != N;
+        if (N <= 1) return false;
+        return (str + str).indexOf(str, 1) != N;
     }
 }
