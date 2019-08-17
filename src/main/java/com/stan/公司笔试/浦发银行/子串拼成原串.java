@@ -41,11 +41,6 @@ public class 子串拼成原串 {
      */
     public boolean process2(String str, int N) {
         if (N == 1) return true;
-        String dual = (str + str).substring(1);
-        //找到dual里第二次出现str的索引，0，N这两个索引是肯定有的，如果false，第二个就是N, 判断第二个是不是N即可
-        // 因为找第二次没有直接的方法，所以把第0个去掉
-        // 判断第一次出现的索引是不是N - 1即可
-        int i = dual.indexOf(str);
-        return i != N - 1;
+        return (str + str).indexOf(str, 1) != N;
     }
 }
