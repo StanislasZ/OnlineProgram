@@ -9,11 +9,12 @@ public class 子串拼成原串 {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.next();
         int N = str.length();
-        System.out.println(new 子串拼成原串().process(str, N));
+        System.out.println(new 子串拼成原串().process2(str, N));
 
     }
 
     public boolean process(String str, int N) {
+        if (N == 1) return true;
         String dual = str + str;
         for (int i = 1; i <= N; ++i) {
             if (dual.substring(i, i + N).equals(str)) {
@@ -22,5 +23,18 @@ public class 子串拼成原串 {
             }
         }
         return false;
+    }
+
+    /**
+     * 直接调用indexOf方法
+     * @param str
+     * @param N
+     * @return
+     */
+    public boolean process2(String str, int N) {
+        if (N == 1) return true;
+        String dual = (str + str).substring(1);
+        int i = dual.indexOf(str);
+        return i != N - 1;
     }
 }
