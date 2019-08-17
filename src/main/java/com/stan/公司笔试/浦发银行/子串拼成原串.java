@@ -13,6 +13,13 @@ public class 子串拼成原串 {
 
     }
 
+    /**
+     * 若存在，则周期为T
+     * str[0,N)  和 str[T, T+N) 必相同
+     * @param str
+     * @param N
+     * @return
+     */
     public boolean process(String str, int N) {
         if (N == 1) return true;
         String dual = str + str;
@@ -26,7 +33,8 @@ public class 子串拼成原串 {
     }
 
     /**
-     * 直接调用indexOf方法
+     * 思路同上，
+     * 改为直接调用indexOf方法
      * @param str
      * @param N
      * @return
