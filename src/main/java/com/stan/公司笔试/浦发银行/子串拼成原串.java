@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class 子串拼成原串 {
 
+    /*
+        给一个字符串，是否存在子串 ,重复多次可以拼接出此原字符串
+     */
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -40,7 +44,6 @@ public class 子串拼成原串 {
      * @return
      */
     public boolean process2(String str, int N) {
-        if (N == 1) return true;
-        return (str + str).indexOf(str, 1) != N;
+        return N == 1 ||  (str + str).indexOf(str, 1) != N;
     }
 }
