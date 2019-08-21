@@ -34,7 +34,7 @@ class Solution_103 {
                 while (!deque.isEmpty()) {
                     list.add(deque.pollFirst());
                 }
-                res.add(new ArrayList<Integer>(list));
+                res.add(new ArrayList<>(list));
                 ++ level;
                 max_cnt = queue.size();
             }
