@@ -29,6 +29,7 @@ class Solution_103 {
             if (top.left != null) queue.add(top.left);
             if (top.right != null) queue.add(top.right);
 
+            //用deque的长度即可，不需要在外面加一个变量来计数
             if (deque.size() == max_cnt) {
                 List<Integer> list = new ArrayList<>();
                 while (!deque.isEmpty()) {
