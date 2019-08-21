@@ -50,7 +50,7 @@ public class _127单词接龙 {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
 
 
-
+        return -1;
 
     }
 }
