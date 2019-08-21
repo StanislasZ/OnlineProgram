@@ -11,41 +11,35 @@ class Solution_103 {
     //双头队列法
     public List<List<Integer>> zigzagLevelOrder_deque(TreeNode root) {
 
-        List<List<Integer>> rlt = new ArrayList<>();
-        if (root == null) return rlt;
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<>(); //bfs队列
+        Deque<Integer> deque = new LinkedList<>();  //辅助双头队列
 
-        Queue<TreeNode> queue = new LinkedList<>();  //bfs队列
-        
-        Deque<Integer> deque = new LinkedList<>();  //辅助队列
+        int level = 0;   //当前层
+        int max_cnt = 1; //当前层双头队列最大元素个数
 
         queue.add(root);
-        int curr_level = 0; //当前层
-        int curr_level_ele = 1; //当前层的元素个数
-        int curr_cnt = 0;
-
         while (!queue.isEmpty()) {
             TreeNode top = queue.poll();
+            //按正反入双头队列
+            if ((level & 1) == 0) deque.addLast(top.val);  //偶，加在队尾
+            else                  deque.addFirst(top.val); //奇，加在队头
+            //按层次入bfs队列
             if (top.left != null) queue.add(top.left);
             if (top.right != null) queue.add(top.right);
-            if (curr_level % 2 == 0) {
-                deque.addLast(top.val);  //正向 插入队尾
-            } else {
-                deque.addFirst(top.val);  //反向 插入队头
-            }
-            if (++curr_cnt == curr_level_ele) {  ////如果个数达到本层最大值
-                List<Integer> temp = new ArrayList<>();
+
+            if (deque.size() == max_cnt) {
+                List<Integer> list = new ArrayList<>();
                 while (!deque.isEmpty()) {
-                    temp.add(deque.pollFirst());
+                    list.add(deque.pollFirst());
                 }
-                rlt.add(new ArrayList<>(temp));
-                curr_cnt = 0;
-                curr_level++;
-                curr_level_ele = queue.size();
+                res.add(new ArrayList<Integer>(list));
+                ++ level;
+                max_cnt = queue.size();
             }
-
         }
-        return rlt;
-
+        return res;
 
     }
 
