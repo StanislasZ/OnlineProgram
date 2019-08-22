@@ -2,6 +2,7 @@ package com.stan.leetcode;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 public class _127单词接龙 {
@@ -50,7 +51,7 @@ public class _127单词接龙 {
     }
 
     /**
-     * 递归
+     * 递归 <100ms
      * bfs -> 双端bfs -> 临近点查找方式
      * @param beginWord
      * @param endWord
@@ -101,5 +102,54 @@ public class _127单词接龙 {
             }
         }
         return bfs(next, end, dict, cnt + 1);
+    }
+
+
+    /**
+     * 优先队列,500ms
+     * @param beginWord
+     * @param endWord
+     * @param wordList
+     * @return
+     */
+    public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        boolean[] vis = new boolean[wordList.size()];
+        PriorityQueue<MyNode> pq = new PriorityQueue<>();
+        pq.add(new MyNode(1, beginWord));
+        while (!pq.isEmpty()) {
+            MyNode curr = pq.poll();
+            for (int i = 0; i < wordList.size(); ++i) {
+                if (!vis[i] && diff(curr.str, wordList.get(i)) == 1) {
+                    if (wordList.get(i).equals(endWord)) return curr.step + 1;
+                    pq.add(new MyNode(curr.step + 1, wordList.get(i)));
+                    vis[i] = true;
+                }
+            }
+        }
+        return 0;
+    }
+
+    private int diff(String a, String b) {
+        int cnt = 0;
+        for (int i = 0; i < a.length(); ++i) {
+            if (a.charAt(i) != b.charAt(i)) ++ cnt;
+        }
+        return cnt;
+    }
+
+}
+
+class MyNode implements Comparable<MyNode>{
+    int step;
+    String str;
+    public MyNode(int step, String str) {
+        this.step = step;
+        this.str = str;
+    }
+
+
+    @Override
+    public int compareTo(MyNode o) {
+        return this.step - o.step;
     }
 }
