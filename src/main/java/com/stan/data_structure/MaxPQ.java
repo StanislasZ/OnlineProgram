@@ -85,13 +85,13 @@ public class MaxPQ<T extends Comparable<T>> {
     }
 
     private int parent(int i){
-        return (i-1)/2;
+        return (i - 1) / 2;
     }
     private int left(int i){
-        return 2*i+1;
+        return 2 * i + 1;
     }
     private int right(int i){
-        return 2*i+2;
+        return 2 * i + 2;
     }
 
     //打印内部数组，调试
