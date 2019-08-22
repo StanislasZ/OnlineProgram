@@ -47,7 +47,9 @@ public class MaxPQ<T extends Comparable<T>> {
         }
     }
 
+
     //下沉（数组顶端被换成了数组最后一个元素），需要把这个较小的元素逐级下沉
+    //递归写法
     private void sink(int k) {
 
         int l_c = left(k);
@@ -59,9 +61,24 @@ public class MaxPQ<T extends Comparable<T>> {
             exch(k, max_i);
             sink(max_i);
         }
+    }
 
+    //下沉
+    //循环写法
+    private void sink2(int k) {
+        while (left(k) < N) {
+            int max_i = k;
+            int l_c = left(k);
+            int r_c = right(k);
+            if (l_c < N && more(l_c, max_i)) max_i = l_c;
+            if (r_c < N && more(r_c, max_i)) max_i = r_c;
+            if (max_i == k) break;
+            exch(k, max_i);
+            k = max_i;
+        }
 
     }
+
 
     //重新分配数组空间，并拷贝
     private void resize(int newLen) {
