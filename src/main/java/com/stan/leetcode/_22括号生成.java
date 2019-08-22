@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class 括号生成 {
+public class _22括号生成 {
     public static void main(String[] args){
 
         /*
