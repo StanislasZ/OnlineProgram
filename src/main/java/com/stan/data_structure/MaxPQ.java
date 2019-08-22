@@ -25,7 +25,7 @@ public class MaxPQ<T extends Comparable<T>> {
     }
     public T delMax() {
         T max = pq[0];
-        exch(1, --N);
+        exch(0, --N);
         pq[N] = null;  //防止内存溢出
         sink(0);
         //缩减
@@ -65,7 +65,7 @@ public class MaxPQ<T extends Comparable<T>> {
 
     //重新分配数组空间，并拷贝
     private void resize(int newLen) {
-        T[] tmp = (T[]) new Object[newLen];
+        T[] tmp = (T[]) new Comparable[newLen];
         for (int i = 0; i < N; ++i)
             tmp[i] = pq[i];
         pq = tmp;
@@ -94,20 +94,28 @@ public class MaxPQ<T extends Comparable<T>> {
         return 2*i+2;
     }
 
+    //打印内部数组，调试
+    public void print() {
+        for (int i = 0; i < N; ++i)
+            System.out.print(pq[i] + " ");
+        System.out.println();
+    }
 
     public static void main(String[] args) {
 
         MaxPQ<Integer> maxPQ = new MaxPQ<>(8);
         maxPQ.insert(4);
-        System.out.println(maxPQ.max());
+        maxPQ.print();
         maxPQ.insert(5);
-        System.out.println(maxPQ.max());
+        maxPQ.print();
         maxPQ.insert(3);
-        System.out.println(maxPQ.max());
+        maxPQ.print();
+        maxPQ.delMax();
+        maxPQ.print();
         maxPQ.insert(1);
-        System.out.println(maxPQ.max());
+        maxPQ.print();
         maxPQ.insert(9);
-        System.out.println(maxPQ.max());
+        maxPQ.print();
 
     }
 }
