@@ -21,103 +21,30 @@ public class 括号生成 {
             ]
          */
 
-        int n=3;
-        System.out.println(new Solution_22().generateParenthesis(n));
+
 
     }
 
-}
-class Solution_22 {
+    List<String> res = new ArrayList<>();
+
+
     public List<String> generateParenthesis(int n) {
 
-        Stack<Character> stack =new Stack<>();
-        List<String> rlt=new ArrayList<>();
-        //dfs(stack,"",rlt,n,n,n);
 
-        return rlt;
+        dfs(0, 0, n, "");
+        return res;
     }
 
-    /**
-     * 注意这种递归方式！！！！！！ 有空再写一遍
-     * @param ans
-     * @param cur
-     * @param open
-     * @param close
-     * @param max
-     */
-    public void backtrack(List<String> ans, String cur, int open, int close, int max){
-        if (cur.length() == max * 2) {
-            ans.add(cur);
+    public void dfs(int left, int right, int n, String curr) {
+        //递归终点
+        if (left == n && right == n) {
+            res.add(curr);
             return;
         }
-
-        if (open < max)
-            backtrack(ans, cur+"(", open+1, close, max);   //这种递归方式不需要回溯！！！妈的比
-        if (close < open)
-            backtrack(ans, cur+")", open, close+1, max);    //同上
-    }
-
-
-
-
-    /**
-     * 思路跟有效的括号一样， 太复杂了！！！！！！！
-     * @param stack
-     * @param temp
-     * @param rlt
-     * @param n
-     * @param res_left
-     * @param res_right
-     */
-    public void dfs(Stack<Character> stack,String temp,List<String> rlt,int n,int res_left,int res_right){
-        if(temp.length()==0){
-            stack.push('(');
-            temp=temp+'(';
-            res_left--;
-            System.out.println("temp长度为0，只能加左括号，此时temp="+temp+"    ,res_left="+res_left+"    ,stack="+stack);
-            System.out.println("进入下一层");
-            dfs(stack,temp,rlt,n,n-1,n);
-        }
-
-        if(temp.length()==n*2){
-            if(!rlt.contains(temp))
-                rlt.add(temp);
-            return;
-
-        }
-
-        //就2种，  ( 或)
-        if(res_left>0){
-            stack.push('(');
-            temp=temp+'(';
-            res_left--;
-            System.out.println("res_left="+res_left+"   ,尝试加左括号，进入下一层");
-            dfs(stack,temp,rlt,n,res_left,res_right);
-            //go back
-            stack.pop();
-            temp=temp.substring(0,temp.length()-1);
-            res_left++;
-            System.out.println("回来后，stack弹出，stack="+stack+"  ,temp="+temp+"  ,res_left="+res_left);
-
-        }
-
-
-        //尝试能否加)
-        if(stack.size()>0&&stack.peek()=='('&&res_right>0){
-            stack.pop();  //左括号弹出
-            temp=temp+')';
-            res_right--;
-            dfs(stack,temp,rlt,n,res_left,res_right);
-            //go back
-            stack.push('(');
-            temp=temp.substring(0,temp.length()-1);
-            res_right++;
-        }
-
-
-
-
-
+        //左括号还有剩余
+        if (left < n)     dfs(left + 1, right, n, curr + '(');
+        //右括号使用量 < 左括号使用量
+        if (right < left) dfs(left, right + 1, n, curr + ')');
 
     }
 
