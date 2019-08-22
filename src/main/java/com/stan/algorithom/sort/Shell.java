@@ -1,5 +1,7 @@
 package com.stan.algorithom.sort;
 
+import static com.stan.algorithom.utils.ArrayUtils.*;
+
 public class Shell {
 
     public static void sort(Comparable[] a){
@@ -35,29 +37,13 @@ public class Shell {
 
     }
 
-    public static boolean less(Comparable v , Comparable w){
-        return Selection.less(v, w);
-    }
-
-    //exchange
-    public static void exch(Comparable[] a, int i, int j){
-        Selection.exch(a, i, j);
-    }
-
-    public static void show(Comparable[] a){
-        Selection.show(a);
-    }
-
-    public static boolean isSorted(Comparable[] a){
-        return Selection.isSorted(a);
-    }
 
     public static void main(String[] args){
 
         Integer[] a = new Integer[]{2,5,9,1,3,7};
         sort(a);
         assert isSorted(a);
-        show(a);
+        printArray(a);
 
 
     }

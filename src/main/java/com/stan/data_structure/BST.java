@@ -1,4 +1,4 @@
-package com.stan.algorithom.sort;
+package com.stan.data_structure;
 
 import java.util.*;
 

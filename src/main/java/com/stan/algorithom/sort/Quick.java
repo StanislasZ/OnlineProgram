@@ -1,6 +1,6 @@
 package com.stan.algorithom.sort;
 
-import com.stan.algorithom.utils.ArrayUtils;
+import static com.stan.algorithom.utils.ArrayUtils.*;
 
 
 
@@ -9,7 +9,7 @@ public class Quick {
 
     public static void sort(Comparable[] a){
 
-        ArrayUtils.shuffle(a);
+        shuffle(a);
         sort(a, 0, a.length - 1);
     }
 
@@ -19,7 +19,7 @@ public class Quick {
 
             int sep_index = partition(a, head, tail);
             System.out.println("sep_index = "+sep_index);
-            show(a);
+            printArray(a);
             sort(a, head, sep_index-1);
             sort(a, sep_index+1, tail);
 
@@ -28,7 +28,7 @@ public class Quick {
 
     }
 
-
+    //三路快排
     public static void sort_3way(Comparable[] a, int head, int tail) {
         if (tail <= head) return;
         int small = head;
@@ -66,22 +66,6 @@ public class Quick {
     }
 
 
-    public static boolean less(Comparable v , Comparable w){
-        return Selection.less(v, w);
-    }
-
-    //exchange
-    public static void exch(Comparable[] a, int i, int j){
-        Selection.exch(a, i, j);
-    }
-
-    public static void show(Comparable[] a){
-        Selection.show(a);
-    }
-
-    public static boolean isSorted(Comparable[] a){
-        return Selection.isSorted(a);
-    }
 
     public static void main(String[] args){
 
@@ -89,7 +73,7 @@ public class Quick {
         //sort(a);
         sort_3way(a, 0, a.length -1);
         assert isSorted(a);
-        show(a);
+        printArray(a);
 
 
     }

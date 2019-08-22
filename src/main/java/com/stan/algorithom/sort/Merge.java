@@ -1,5 +1,7 @@
 package com.stan.algorithom.sort;
 
+import static com.stan.algorithom.utils.ArrayUtils.*;
+
 public class Merge {
 
     private static Comparable[] aux;
@@ -69,22 +71,6 @@ public class Merge {
     }
 
 
-    public static boolean less(Comparable v , Comparable w){
-        return Selection.less(v, w);
-    }
-
-    //exchange
-    public static void exch(Comparable[] a, int i, int j){
-        Selection.exch(a, i, j);
-    }
-
-    public static void show(Comparable[] a){
-        Selection.show(a);
-    }
-
-    public static boolean isSorted(Comparable[] a){
-        return Selection.isSorted(a);
-    }
 
     public static void main(String[] args){
 
@@ -92,7 +78,7 @@ public class Merge {
         //sort(a);
         sort_from_bottom(a);
         assert isSorted(a);
-        show(a);
+        printArray(a);
 
 
     }
