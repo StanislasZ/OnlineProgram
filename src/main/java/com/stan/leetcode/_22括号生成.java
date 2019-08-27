@@ -21,7 +21,7 @@ public class _22括号生成 {
             ]
          */
 
-
+        System.out.println(new _22括号生成().generateParenthesis(3));
 
     }
 
