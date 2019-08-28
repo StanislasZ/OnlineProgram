@@ -15,7 +15,7 @@ public class 下一个排列 {
             1,1,5 → 1,5,1
          */
 
-        int[] nums = { 1,4,5,2 };
+        int[] nums = { 2,6,3,2,1 };
         new Solution_31().nextPermutation(nums);
 
         for (int i = 0; i < nums.length; i++) {
