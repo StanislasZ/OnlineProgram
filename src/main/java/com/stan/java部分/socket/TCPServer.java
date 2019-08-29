@@ -18,6 +18,7 @@ public class TCPServer {
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
             clientSentence = isFromClient.readLine();
             capSentence = clientSentence.toUpperCase() + '\n';
+
             outToClient.writeBytes(capSentence);
         }
     }
