@@ -12,6 +12,7 @@ public class KMP {
      * 起码，我们验证了模式串 j 之前的子串能够与主串匹配。
      * 我们移动 j， 使得与后缀相同的前缀移动到后缀的位置，则这一部分仍然是匹配的，可以继续往后尝试
      * 用 next[j] 去表示每次匹配失败时 j 应该移到的位置
+     *
      */
 
 
@@ -20,12 +21,10 @@ public class KMP {
 
 
         String pattern = "aabb";
-//        String text = "abcaabbcabcaabb";
         String text = "abcabbcabcaabb";
 
-//        kmp_search(text, pattern);
         System.out.println(KMP(text, pattern));
-//        KMP2(text, pattern);
+
     }
 
     public static void getNext(String pattern, int[] next) {
