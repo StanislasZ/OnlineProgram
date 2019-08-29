@@ -46,6 +46,30 @@ public class KMP {
     }
 
 
+
+
+    //返回模式串第一次出现在text中的位置 即String的indexOf()方法
+    public static int KMP(String text, String pattern) {
+        int i = 0, j = 0;
+        int[] next = new int[pattern.length()];
+        getNext(pattern, next);
+
+        int len1 = text.length();
+        int len2 = pattern.length();
+        while (i < len1) {
+            if (j == len2 - 1 && text.charAt(i) == pattern.charAt(j)) {
+                return i - j;   //匹配到，直接退出
+            }
+            if (j == -1 || text.charAt(i) == pattern.charAt(j)) {
+                ++i;
+                ++j;
+            } else {
+                j = next[j];   //j回退
+            }
+        }
+        return -1;
+    }
+
     //打印模式串出现的所有位置
     public static void KMP2(String text, String pattern) {
         int i = 0, j = 0;
@@ -70,99 +94,5 @@ public class KMP {
 
     }
 
-    //返回模式串第一次出现在text中的位置 即String的indexOf()方法
-    public static int KMP(String text, String pattern) {
-        int i = 0, j = 0;
-        int[] next = new int[pattern.length()];
-        getNext(pattern, next);
 
-        int len1 = text.length();
-        int len2 = pattern.length();
-        while (i < len1) {
-            if (j == len2 - 1 && text.charAt(i) == pattern.charAt(j)) {
-                return i - j;   //匹配到，直接退出
-            }
-            if (j == -1 || text.charAt(i) == pattern.charAt(j)) {
-                ++i;
-                ++j;
-            } else {
-                j = next[j];   //j回退
-            }
-        }
-        return -1;
-    }
-
-
-
-
-
-
-
-//    //from bilibili
-//    public static void prefix_table(String pattern, int[] prefix) {
-//        char[] pattern_char = pattern.toCharArray();
-//        int n = prefix.length;
-//        prefix[0] = 0;
-//        int len = 0;
-//        int i = 1;   //从索引=1开始比较
-//        while (i < n) {
-//            System.out.println("i = " + i + ", len = " + len);
-//            if (pattern_char[i] == pattern_char[len]) {
-//                len++;
-//                prefix[i++] = len;
-//            } else {
-//                if (len > 0)
-//                    len = prefix[len - 1];
-//                else
-//                    prefix[i++] = len;
-//            }
-//        }
-//    }
-//    //from bilibili
-//    public static void move_prefix(int[] prefix) {
-//        int length = prefix.length;
-//
-//        for (int i = length - 1; i > 0; i--) {
-//            prefix[i] = prefix[i - 1];
-//        }
-//        prefix[0] = -1;
-//
-//
-//    }
-//    //from bilibili
-//    public static void kmp_search(String text, String pattern) {
-//        int m = text.length();
-//        int n = pattern.length();
-//        int[] prefix = new int[n];
-//        prefix_table(pattern, prefix);
-//        for (int ele : prefix) System.out.println(ele);
-//        move_prefix(prefix);
-//        System.out.println("prefix往右移一位，0位为-1");
-//        for (int ele : prefix) System.out.println(ele);
-//
-//
-//
-//        //开始kmp
-//        //text[i]   ,text长度为m
-//        //pattern[j] ，pattern长度为n
-//        int i = 0;
-//        int j = 0;
-//
-//        while (i < m) {
-//            if (j == n - 1 && text.charAt(i) == pattern.charAt(j)) {
-//                System.out.println("Found pattern at " + (i - j));
-//                j = prefix[j];
-//            }
-//            if (text.charAt(i) == pattern.charAt(j)) {
-//                i++;
-//                j++;
-//            } else {
-//                j = prefix[j];
-//                if (j == -1) {
-//                    i++;
-//                    j++;
-//                }
-//            }
-//        }
-//    }
 }
