@@ -54,7 +54,7 @@ public class 花匠 {
 
             int res = 0;  //某次输出的结果
             for (int i = left; i <= right; ++i) {
-                if (map.containsKey(i)) {
+                if (map.containsKey(i)) {  //算过的，直接拿
                     cnt = map.get(i);
                 } else {
                     cnt = 0;
