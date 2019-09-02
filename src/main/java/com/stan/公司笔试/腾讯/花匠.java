@@ -40,7 +40,7 @@ public class 花匠 {
         Scanner scanner = new Scanner(System.in);
         int t = scanner.nextInt();
         int k = scanner.nextInt();
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();  //避免重复计算，如[1,3]算完，[2 ,3]直接就能从map拿
         while (t-- > 0) {
             cnt = 0;
             int left = scanner.nextInt();
@@ -52,7 +52,7 @@ public class 花匠 {
                 continue;
             }
 
-            int res = 0;
+            int res = 0;  //某次输出的结果
             for (int i = left; i <= right; ++i) {
                 if (map.containsKey(i)) {
                     cnt = map.get(i);
