@@ -69,7 +69,9 @@ public class 花匠 {
     }
 
     /**
-     *
+     * dfs, 超时了
+     * 计算一个 由红或白开始的， 总个数为right的 摆放总数
+     * 故 比如要放4个 ， 摆放总数 = dfs(k, 1, 0, 4) + dfs(k, 0, 0, 4)
      * @param k
      * @param pre : 上一次的颜色
      * @param curr ： 已摆放的个数
