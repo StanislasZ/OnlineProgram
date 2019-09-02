@@ -73,24 +73,27 @@ public class 花匠 {
      * 计算一个 由红或白开始的， 总个数为right的 摆放总数
      * 故 比如要放4个 ， 摆放总数 = dfs(k, 1, 0, 4) + dfs(k, 0, 0, 4)
      * @param k
-     * @param pre : 上一次的颜色
+     * @param pre : 上一次的颜色， 1代表红   0代表白
      * @param curr ： 已摆放的个数
      * @param right： 最多几个
      */
     public static void dfs(int k, int pre, int curr, int right) {
 
         //递归终点
+        if (curr > right) return;
         if (curr == right) {
             ++ cnt;
             return;
         }
-        for (int end = curr; end <= right; ++ end) {
-
-            if (pre == 1 && (end - curr + 1) % k == 0)  //上一个是红，这次放白
-                dfs(k, 0, end + 1, right);
-            else
-                dfs(k, 1, end + 1, right);
-
+        int end = curr;
+        while (end <= right) {
+            if (pre == 1) {  //上一个红，这次放白
+                end += k;
+                dfs(k, 0, end, right);
+            } else {         //上一个白，这次放红
+                dfs(k, 1, ++end, right);
+            }
         }
+
     }
 }
