@@ -19,7 +19,8 @@ public class Singleton {
 // 懒汉-线程安全
 class Singleton2 {
 
-    private static Singleton2 uniqueInstance;
+    //volatile: 防止JVM指令重排
+    private volatile static Singleton2 uniqueInstance;
     private Singleton2() {
 
     }
