@@ -4,6 +4,17 @@ import java.util.*;
 
 public class 笔记草稿 {
 
+    /*
+        有一篇笔记草稿，请你帮忙输出最后内容
+
+        1. 输入字符包括英文字符 , '(' ,  ')'  ,  '<'
+        2. 英文字符表示笔记内容
+        3. （）之间表示注释，任何字符都无效，括号保证成对出现
+        4.  '<' 表示退格， 删去前面一个笔记内容字符
+
+     */
+
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
