@@ -7,55 +7,59 @@ import java.util.Stack;
 
 public class 表达式解析 {
 
-    public static void main(String[] args) {
 
+    /*
+        把每对括号里的内容翻转，最后去掉括号
+
+        例：
+        输入：
+        ((ur)oi)
+
+        输出：
+        iour
+     */
+
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         System.out.println(parse(str));
-
     }
-    public static String parse(String str) {
-        char[] arr= str.toCharArray();
 
-        int cnt_left = 0;
-        int cnt_right = 0;
+    /**
+     * 遍历一次char数组
+     * 碰到左括号就入栈，碰到右括号弹出，得到一对括号的左右索引，该范围内翻转
+     * @param str
+     * @return
+     */
+    public static String parse(String str) {
+        char[] arr = str.toCharArray();
+        String res = "";  //result
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] == '(') {
-                ++ cnt_left;
-                stack.push(i);
-            }
+            if (arr[i] == '(') stack.push(i);
             else if (arr[i] == ')') {
-                ++ cnt_right;
-                if (stack.isEmpty()) {
-                    return "";
-                }
-                int left = stack.pop();
-                reverse(arr, left, i);
-
-
+                if (stack.isEmpty()) return "";  //括号不匹配
+                reverse(arr, stack.pop(), i);
             }
-
         }
-        if (cnt_left != cnt_right) return "";
-        String res = "";
-        for (int i = 0; i < arr.length; ++i) {
+        if (!stack.isEmpty()) return "";  //仍存在左括号，错误
+        for (int i = 0; i < arr.length; ++i)
             if (arr[i] != '(' && arr[i] != ')') res += arr[i];
-        }
         return res;
-
     }
 
-
+    /**
+     * 数组指定范围翻转
+     * @param arr
+     * @param left
+     * @param right
+     */
     public static void reverse(char[] arr, int left, int right) {
-        if (left >= right) return;
-
-
-        for (int i = left; i <= (left + right) /2; ++i) {
-            char temp = arr[left - i + right];
-            arr[left - i + right] = arr[i];
-            arr[i] = temp;
+        while (left < right) {
+            char temp = arr[right];
+            arr[right--] = arr[left];
+            arr[left++] = temp;
         }
 
 
