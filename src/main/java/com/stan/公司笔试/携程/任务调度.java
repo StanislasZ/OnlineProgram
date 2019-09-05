@@ -6,6 +6,21 @@ import java.util.Scanner;
 
 public class 任务调度 {
 
+    /*
+        m个节点，有一批任务要执行，每个任务需要时间为 array[i]
+        每个节点在同一时间只能执行一个任务，每个节点只能执行连续的任务
+        请问任务完成的最短时间。
+
+        输入：
+        3 5
+        1 5 3 4 2
+
+        输出：
+        6
+        解释：
+        1+ 5  ；  3 ；   4  + 2
+     */
+
     static int res = 0;
 
     static List<Integer> list = new ArrayList<>();
@@ -54,21 +69,17 @@ public class 任务调度 {
             res = res > 0? Math.min(res, temp) : temp;
             return;
         }
-
-
-        for (int end = curr; end <= arr.length - (m - level); ++end) {
+        //如果本段是最后一段，直接加到最后
+        //这段end最大值与 m 有关
+        for (int end = level == m - 1? arr.length - 1 : curr; end <= arr.length - (m - level); ++end) {
 
             //计算本段和
             int sum = getSum(arr, curr, end);
-            if (res > 0 && sum > res) return;
-
-
+            if (res > 0 && sum > res) return; //剪纸
             list.add(sum);
             dfs(arr, m, level + 1, end + 1);
             list.remove(list.size() - 1);  //回溯
         }
-
-
     }
 
     static int getSum(int[] arr, int left, int right) {
