@@ -19,9 +19,9 @@ public class 喝咖啡 {
             int m = scanner.nextInt();
 
             int pre = 1 - k; //上一次喝的天数
-            int res = m++;  //手动多加一天的天数 为第32天
+            int res = m++;  //手动多加一天的天数 为第30 + k天
             while (m-- > 0) {
-                int curr = m == 0? 32 : scanner.nextInt();  //最后一次，人为设置为32
+                int curr = m == 0? 30 + k : scanner.nextInt();  //最后一次，人为设置为30 + k
                 int cnt = (curr - k) - (pre + k) + 1;  //区间内有几天
                 if (cnt > 0) res += (int)Math.ceil(cnt / (k + 0.0));  //根据k, 算出可以喝咖啡的天数
                 pre = curr;   //迭代
