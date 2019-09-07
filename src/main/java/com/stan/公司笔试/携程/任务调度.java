@@ -37,6 +37,23 @@ public class 任务调度 {
         System.out.println(String.valueOf(res));
     }
 
+
+    /**
+     * 动态规划
+     * dp[i][j] 表示 0- i- 1 被 分成 j 段后 的 最大段和
+     * @param m
+     * @param array
+     * @return
+     */
+    static int schedule2(int m,int[] array) {
+
+        // TODO: 2019/9/6
+
+
+        return 0;
+    }
+
+
     static int schedule(int m,int[] array) {
 
         int N = array.length;
