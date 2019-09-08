@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 public class 喝咖啡 {
 
+    /*
+        k为间隔， 若k = 1 ，则两次喝咖啡的日子至少间隔1天
+        m为必喝的日子
+
+        求1-30天内，能喝几天
+     */
+
+
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
