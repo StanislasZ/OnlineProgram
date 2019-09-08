@@ -9,15 +9,13 @@ public class 喝咖啡 {
         Scanner scanner = new Scanner(System.in);
         int T = scanner.nextInt();
         while (T-- > 0) {
-
             int k = scanner.nextInt();
             if (k == 0) {
                 System.out.println(30);
                 continue;
             }
             ++ k;
-            int m = scanner.nextInt();
-
+            int m = scanner.nextInt();   //必须喝的天数
             int pre = 1 - k; //上一次喝的天数
             int res = m++;  //手动多加一天的天数 为第30 + k天
             while (m-- > 0) {
