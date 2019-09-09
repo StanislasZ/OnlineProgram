@@ -15,36 +15,39 @@ public class _410分割数组的最大值 {
 
 
     /**
-     * 动态规划一维解法
+     * 二分法
      * @param nums
      * @param m
      * @return
      */
-    public int splitArray2(int[] nums, int m) {
+    public int splitArray3(int[] nums, int m) {
 
-        int n = nums.length;
-        long[] dp = new long[n + 1];
-        long[] sum = new long[n + 1];
-
-        for (int i = 1; i <= n; ++i) {
-            sum[i] = sum[i - 1] + nums[i - 1];
-            dp[i] = sum[i];
+        long left = nums[0];
+        long right = 0;
+        for (int ele : nums) {
+            right = right + ele;
+            left = left > ele ? left : ele;
         }
-
-        for(int j = 2; j <= m; ++j){  //切的份数递增
-            for(int i = n; i >= j; --i){   //索引范围递减
-                long tmp = 0;
-                for(int k = i - 1; k >= j - 1; --k){   //j-1份至少要j-1个数，故k >= j - 1
-                    tmp = Math.max(dp[k], sum[i] - sum[k]);
-                    dp[i] = Math.min(dp[i], tmp);
+        while (left < right) {
+            long mid = (left + right)/ 2;
+            long temp = 0;
+            int cnt = 1;
+            for (int ele : nums) {
+                temp = temp + ele;
+                if (temp > mid) {
+                    temp = ele;
+                    ++ cnt;
                 }
             }
+            if (cnt > m) left = mid + 1;
+            else right = mid;
         }
-
-        return (int)dp[n];
+        return (int)left;
 
 
     }
+
+
     /**
      * 动态规划二维解法：
      * dp[i][j] 表示 [0, i - 1]的索引范围内 , 分成j段 的 最大值
@@ -97,7 +100,13 @@ public class _410分割数组的最大值 {
     }
 
 
-    public int splitArray4(int[] nums, int m) {
+    /**
+     * 动态规划一维解法
+     * @param nums
+     * @param m
+     * @return
+     */
+    public int splitArray2(int[] nums, int m) {
 
         int n = nums.length;
         long[] dp = new long[n + 1];
