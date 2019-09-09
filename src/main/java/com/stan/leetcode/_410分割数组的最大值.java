@@ -15,7 +15,20 @@ public class _410分割数组的最大值 {
 
 
     /**
-     * 二分法
+     * 二分法 + 贪心试探
+     * 数组和的最大值在[max(nums), sum(nums)]之间
+     *
+     * 假定这个最大值是a, 可以遍历一次数组，贪心试探分段
+     * 每段的数字和刚好不超过a， 最后得到一个段数cnt
+     *
+     * 如果 cnt > m ， 则分段太多， 原因是 a太小， 我们需要把a 改大点
+     * 如果 cnt < m,   则分段太少， 原因是 a太大， 我们需要把a 改小点
+     *
+     * 特别注意， 当cnt = m时， 此时的a 可以让分段数满足题目的要求
+     * 但是，a可能可以更小，仍能分成m段
+     *
+     * 故： 等于的情况 应归于  小于的情况， 退化成2种情况， > 和 <=
+     *
      * @param nums
      * @param m
      * @return
@@ -23,7 +36,7 @@ public class _410分割数组的最大值 {
     public int splitArray3(int[] nums, int m) {
 
         long left = nums[0];
-        long right = 0;
+        long right = 0;    //
         for (int ele : nums) {
             right = right + ele;
             left = left > ele ? left : ele;
@@ -34,13 +47,14 @@ public class _410分割数组的最大值 {
             int cnt = 1;
             for (int ele : nums) {
                 temp = temp + ele;
-                if (temp > mid) {
+                if (temp > mid) {   //新开一段
                     temp = ele;
-                    ++ cnt;
+                    ++ cnt;   //段数 + 1
                 }
             }
-            if (cnt > m) left = mid + 1;
-            else right = mid;
+            if (cnt > m) left = mid + 1;   //分段过多，应把最大值调大
+            //类比二分查找插入位置，等号归到小于
+            else right = mid;  //分段过少，应该最小值调小
         }
         return (int)left;
 
