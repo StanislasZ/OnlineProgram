@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class 红篮球 {
 
+    /*
+        n个红球 m个篮球  按A B C  A B C…………的顺序轮流拿一个球
+        A B谁先取到红球就赢， 若到最后A B都没拿到红球，算B胜
+
+        求A获胜概率
+     */
+
+
     static double res = 0.0;
 
 
@@ -25,6 +33,7 @@ public class 红篮球 {
      * @param red_remain: 红球剩余个数
      * @param blue_remain: 篮球剩余个数
      * @param cnt：已经拿了几次了， 通过cnt % 3来区分是谁
+     * @param base：上一层传递下来的概率，这次不管怎么弄，总概率就是base
      * @param pre：上一个是红 1    蓝 0
      */
     public static void dfs(int red_total, int blue_total, int red_remain, int blue_remain, int cnt, double base, int pre) {
