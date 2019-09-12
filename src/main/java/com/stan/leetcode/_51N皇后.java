@@ -56,5 +56,7 @@ public class _51N皇后 {
     }
     public static void main(String[] args){
         System.out.println(new _51N皇后().solveNQueens(5));
+
+
     }
 }
