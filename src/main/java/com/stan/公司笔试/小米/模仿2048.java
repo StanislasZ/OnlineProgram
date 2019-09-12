@@ -8,9 +8,7 @@ public class 模仿2048 {
     static String solution(String[] input) {
 
         String res = "";
-
         for (String s : input) {
-
             String[] temp = s.split("\\s+");
             int N = temp.length;
             int[] arr = new int[N];
@@ -37,9 +35,6 @@ public class 模仿2048 {
                 res = res + 0 + " ";
             }
             res = res + "\n";
-            //res = res.substring(0, res.length() - 1);
-
-
         }
 
         return res;
