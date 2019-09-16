@@ -23,7 +23,7 @@ class Solution_300 {
         int[] dp = new int[N];
         int res = 0;
         for (int i = 0; i < N; ++i) {
-            dp[i] = 1;
+            dp[i] = 1;   //最差就
             for (int j = 0; j < i; ++j) {
                 if (nums[j] < nums[i]) dp[i] = Math.max(dp[i], dp[j] + 1);
             }
