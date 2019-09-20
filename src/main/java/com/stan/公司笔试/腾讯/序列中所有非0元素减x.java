@@ -19,6 +19,10 @@ public class 序列中所有非0元素减x {
             int temp = (int)iterator.next();
             System.out.println(temp - pre);
             pre = temp;
+            -- k;
+        }
+        while (k-- > 0) {
+            System.out.println(0);
         }
     }
 
