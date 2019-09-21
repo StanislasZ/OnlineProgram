@@ -40,20 +40,20 @@ public class 完美的序列 {
 //        }
 
 
-//        Scanner in = new Scanner(System.in);
-//        int T = in.nextInt();
-//
-//        while (T-- > 0){
-//            int geshu = in.nextInt();
-//            int[] shuzu = new int[geshu];
-//            for (int i = 0; i < geshu; i++) {
-//                shuzu[i] = in.nextInt();
-//            }
-//
-////            System.out.println(shuzu);
-//            int t = panbie(shuzu);
-//            System.out.println(t);
-//        }
+        Scanner in = new Scanner(System.in);
+        int T = in.nextInt();
+
+        while (T-- > 0){
+            int geshu = in.nextInt();
+            int[] shuzu = new int[geshu];
+            for (int i = 0; i < geshu; i++) {
+                shuzu[i] = in.nextInt();
+            }
+
+//            System.out.println(shuzu);
+            int t = panbie(shuzu);
+            System.out.println(t);
+        }
 
 
     }
