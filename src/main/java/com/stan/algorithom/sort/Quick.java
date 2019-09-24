@@ -29,6 +29,7 @@ public class Quick {
     }
 
     //三路快排
+    //leetcode75颜色分类
     public static void sort_3way(Comparable[] a, int head, int tail) {
         if (tail <= head) return;
         int small = head;
