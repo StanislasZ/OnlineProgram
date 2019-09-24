@@ -19,7 +19,5 @@ public class SIP {
         int right = last == s.length() - 3?  last: s.length();
         s = s.substring(left, right);
         System.out.println(s);
-
-
     }
 }
