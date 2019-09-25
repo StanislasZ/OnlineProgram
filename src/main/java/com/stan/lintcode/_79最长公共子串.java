@@ -1,6 +1,16 @@
 package com.stan.lintcode;
 
 public class _79最长公共子串 {
+
+
+    /**
+     * dp
+     * dp[i][j] 表示 A从[0,i-1]取，B取[0,j-1]取，能够取到的最大长度
+     * 且 A必须取到i-1位，B必须取到j-1位
+     * @param A
+     * @param B
+     * @return
+     */
     public int longestCommonSubstring(String A, String B) {
 
 
@@ -8,7 +18,6 @@ public class _79最长公共子串 {
         int b_len = B.length();
         int max = 0;
 
-        //dp[i][j] 为 A取前i个，B取前j个，看这两个的LCS长度，各个的最后一个不等，肯定是0了
         int[][] dp = new int[a_len + 1][b_len + 1];
 
 

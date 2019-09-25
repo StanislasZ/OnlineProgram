@@ -1,6 +1,6 @@
 package com.stan.lintcode;
 
-public class _77最长上升子序列 {
+public class _76最长上升子序列 {
     public static void main(String[] args) {
 
     }
