@@ -246,12 +246,16 @@ public class BST<K extends Comparable<K>, V> {
     // 转化为根->右->左， 然后reverse
     private void keys_postorder_loop(Node<K,V> x, Queue<K> queue) {
 
+
+
         if (x == null) return;
         Stack<Node<K,V>> stack = new Stack<>();
+        Stack<K> stack_tmp = new Stack<>();
         while (x != null || !stack.empty()) {
 
             if (x != null) {
-                queue.add(x.key);
+                //queue.add(x.key);
+                stack_tmp.push(x.key);
                 stack.push(x.left);
                 x = x.right;
             }
@@ -259,8 +263,27 @@ public class BST<K extends Comparable<K>, V> {
                 x = stack.pop();
             }
         }
-        //反转queue
-        //TODO
+        //倒出至queue
+        while (!stack_tmp.isEmpty()) queue.add(stack_tmp.pop());
+
+        //第二种
+        /*
+        Stack<Node<K,V>> stackRes = new Stack<>();
+        Stack<Node<K,V>> stackTmp = new Stack<>();
+        stackTmp.push(root);
+        Node currNode;
+
+        while (!stackTmp.isEmpty()) {
+            currNode = stackTmp.pop();
+            stackRes.push(currNode);
+            if (currNode.left != null) stackTmp.push(currNode.left);
+            if (currNode.right != null) stackTmp.push(currNode.right);
+        }
+        while (!stackRes.isEmpty()) {
+            System.out.print(stackRes.pop().val+"-->");
+        }
+        */
+
     }
 
 

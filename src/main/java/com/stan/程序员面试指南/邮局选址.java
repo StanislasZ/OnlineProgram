@@ -14,10 +14,18 @@ public class 邮局选址 {
         int[] coor = new int[N];
         for (int i = 0; i < N; ++i) coor[i] = scanner.nextInt();
 
-        dfs(-1, coor, 0, 0, num);
-        System.out.println(res);
+//        dfs(-1, coor, 0, 0, num);
+//        System.out.println(res);
+
+
 
     }
+
+
+
+
+
+
 
     /**
      * dfs  超时
