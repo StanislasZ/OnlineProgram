@@ -217,7 +217,7 @@ public class BST<K extends Comparable<K>, V> {
                 queue.add(x.key);  //先打印根的key
                 stack.push(x.right); //存储右儿子
                 x = x.left;      //指向左儿子
-            }else {
+            } else {
                 x = stack.pop();
             }
         }

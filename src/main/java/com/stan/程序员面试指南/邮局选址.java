@@ -14,14 +14,51 @@ public class 邮局选址 {
         int[] coor = new int[N];
         for (int i = 0; i < N; ++i) coor[i] = scanner.nextInt();
 
+        //法1 : dfs
 //        dfs(-1, coor, 0, 0, num);
 //        System.out.println(res);
 
 
+        //法2 : dp
+        System.out.println(new 邮局选址().minDistance(coor, num));
 
     }
 
+    /**
+     * dp
+     * @param arr
+     * @param num: 要建几个邮局
+     * @return
+     */
+    public int minDistance(int[] arr, int num) {
+        int N = arr.length;
+        if (arr == null || num < 1 || N < num) return 0;
 
+        int[][] w = new int[N + 1][N + 1];
+        //区间必须右边大于左边, j > i
+        for (int i = 0; i < N; ++i) for (int j = i + 1; j < N; ++j)
+            w[i][j] = w[i][j - 1] + arr[j] - arr[(i + j) / 2];
+
+        //dp[i][j]表示 在[0-j]建 i+1 个邮局 的最短距离和
+        int[][] dp = new int[num][N];
+        for (int j = 0; j < N; ++j) dp[0][j] = w[0][j];   //必要初始化
+
+
+        for (int i = 1; i < num; ++i) {
+            for (int j = i + 1; j < N; ++j) {
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int k = 0; k <= j; ++k) {
+                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + w[k + 1][j]);
+                }
+
+            }
+        }
+
+
+
+        return dp[num - 1][N - 1];
+
+    }
 
 
 
