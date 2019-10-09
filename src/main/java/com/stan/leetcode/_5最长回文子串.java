@@ -2,6 +2,46 @@ package com.stan.leetcode;
 
 public class _5最长回文子串 {
 
+
+    /**
+     * 动态规划， 效率不高
+     * dp[i][j]: 若s[i,j]为回文，为true
+     * dp[i][j] = true 若dp[i+1][j-1]为true 切 s[i]==s[j]
+     * 先看长度=1， =2  ， =3.。。。
+     * @param s
+     * @return
+     */
+    public String longestPalindrome_dp(String s) {
+        int N = s.length();
+        if (N <= 1) return s;
+        boolean[][] dp = new boolean[N][N];
+
+        String res = "";
+
+        for (int i = 0; i < N; ++i) {
+            for (int j = i; j >= 0; --j) {
+                dp[i][j] = true;
+            }
+        }
+        res = s.charAt(0) + "";
+
+        for (int len = 2; len <= N; ++len) {
+            for (int start = 0; start <= N - len; ++ start) {
+                dp[start][start + len - 1] = dp[start + 1][start + len - 2] && s.charAt(start) == s.charAt(start + len - 1);
+                if (dp[start][start + len - 1]) res = s.substring(start, start + len);
+            }
+        }
+        return res;
+
+    }
+
+
+
+    /**
+     * 中心扩展，考虑奇偶两种情况
+     * @param s
+     * @return
+     */
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 1) return "";
         int start = 0, end = 0;
