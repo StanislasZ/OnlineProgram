@@ -21,6 +21,16 @@ public class BST<K extends Comparable<K>, V> {
             this.right = null;
             this.N = N;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 
     // 返回bst的大小(结点数)
@@ -309,6 +319,41 @@ public class BST<K extends Comparable<K>, V> {
         return list;
     }
 
+
+    /**
+     * 判断是否为完全二叉树
+     * 思路：层次遍历
+     * @return
+     */
+    public boolean isCompleteBST() {
+
+        Queue<Node<K,V>> queue = new LinkedList<>();
+        queue.add(root);
+
+        boolean leaf = false;
+
+        while (!queue.isEmpty()) {
+            Node top = queue.poll();
+            System.out.println("top.val = " + top.value);
+            //没有左儿子，有右儿子，肯定不是
+            if (top.right != null && top.left == null) return false;
+
+            //接下来的点必须是叶子节点，有儿子就是错
+            if (leaf && (top.left != null || top.right != null)) return false;
+
+            //儿子入队列
+            if (top.left != null) queue.add(top.left);
+            if (top.right != null) queue.add(top.right);
+
+            //右儿子空，接下来的点必须是叶子节点
+            leaf = leaf || top.right == null;
+        }
+
+        return true;
+    }
+
+
+
     // 获得树的深度，根到最下面那个结点的数量（包括根和这个结点）
     public int depth(){
         return depth(root);
@@ -324,29 +369,32 @@ public class BST<K extends Comparable<K>, V> {
         BST<Integer, Integer> bst = new BST<>();
         bst.deleteMin();
         System.out.println(bst.min());
+        bst.put(10, 10);
         bst.put(5, 5);
-        bst.put(3, 3);
-        bst.put(9, 9);
+        bst.put(15, 15);
         bst.put(1, 1);
-        bst.put(7, 7);
-        bst.put(4, 4);
+        bst.put(11, 11);
 
-        Iterator<Integer> iterator = bst.keys(2,8).iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
+        System.out.println(bst.levelOrder());
 
-        System.out.println("---");
-        List<Integer> l2 = bst.levelOrder();
-        for (int i=0;i<l2.size();i++){
-            System.out.println(l2.get(i));
-        }
+        System.out.println("是否为完全二叉树 " + bst.isCompleteBST());
 
-        System.out.println("depth is "+ bst.depth());
-
-        System.out.println("select 3 is " + bst.select(0));
-
-        System.out.println(bst.floor(200));
+//        Iterator<Integer> iterator = bst.keys(2,8).iterator();
+//        while (iterator.hasNext()){
+//            System.out.println(iterator.next());
+//        }
+//
+//        System.out.println("---");
+//        List<Integer> l2 = bst.levelOrder();
+//        for (int i=0;i<l2.size();i++){
+//            System.out.println(l2.get(i));
+//        }
+//
+//        System.out.println("depth is "+ bst.depth());
+//
+//        System.out.println("select 3 is " + bst.select(0));
+//
+//        System.out.println(bst.floor(200));
 
     }
 
