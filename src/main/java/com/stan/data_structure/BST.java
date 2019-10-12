@@ -334,7 +334,7 @@ public class BST<K extends Comparable<K>, V> {
 
         while (!queue.isEmpty()) {
             Node top = queue.poll();
-            System.out.println("top.val = " + top.value);
+
             //没有左儿子，有右儿子，肯定不是
             if (top.right != null && top.left == null) return false;
 
@@ -348,7 +348,6 @@ public class BST<K extends Comparable<K>, V> {
             //右儿子空，接下来的点必须是叶子节点
             leaf = leaf || top.right == null;
         }
-
         return true;
     }
 
