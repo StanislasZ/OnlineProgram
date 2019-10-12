@@ -330,7 +330,7 @@ public class BST<K extends Comparable<K>, V> {
         Queue<Node<K,V>> queue = new LinkedList<>();
         queue.add(root);
 
-        boolean leaf = false;
+        boolean leaf = false;  //若leaf为true，在层次遍历时，遍历到的每个节点必须是叶子节点，否则就不是完全二叉树
 
         while (!queue.isEmpty()) {
             Node top = queue.poll();
