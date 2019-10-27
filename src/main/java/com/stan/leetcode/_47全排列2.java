@@ -30,7 +30,6 @@ public class _47全排列2 {
         for (int i = 0; i < nums.length; i++) {
 
 
-
             if (!vis[i] && !set.contains(nums[i])) {
                 //若没被使用过
                 temp.add(nums[i]);
