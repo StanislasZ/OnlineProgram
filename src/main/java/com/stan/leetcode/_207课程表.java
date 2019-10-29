@@ -1,12 +1,41 @@
 package com.stan.leetcode;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class _207课程表 {
 
+
+    /**
+     * 关注某时刻所有点的入度，删除入度为0的点，并把从他们指向的点的入度-1
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
+    public boolean canFinish_indegree(int numCourses, int[][] prerequisites) {
+
+        int[] indegrees = new int[numCourses];  //indegrees[i]表示编号为i的顶点的入度
+        for (int[] edge : prerequisites) ++ indegrees[edge[0]];
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; ++i) {
+            if (indegrees[i] == 0) queue.add(i);   //入度为0 的 入队列
+        }
+        while (!queue.isEmpty()) {
+            int top = queue.poll();
+            -- numCourses;
+            for (int[] edge : prerequisites) {
+                if (edge[1] != top) continue;
+                if (-- indegrees[edge[0]] == 0) queue.add(edge[0]);
+            }
+        }
+        return numCourses == 0;
+
+    }
+
+
+
+
+    //*************************************************************
 
     private boolean[] marked;
     private int[] edgeTo;  //为了最后找到环的时候，能列举出环中的所有顶点，需要知道 谁指向了谁
