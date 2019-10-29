@@ -13,19 +13,27 @@ public class _207课程表 {
      */
     public boolean canFinish_indegree(int numCourses, int[][] prerequisites) {
 
-        int[] indegrees = new int[numCourses];  //indegrees[i]表示编号为i的顶点的入度
-        for (int[] edge : prerequisites) ++ indegrees[edge[0]];
+        //入度数组 indegrees[i]表示编号为i的顶点的入度
+        int[] indegrees = new int[numCourses];
+        //邻接表数组, adj[2]为标号为2的顶点 指向的顶点的 list
+        List<Integer>[] adj = new List[numCourses];
+        for (int i = 0; i < numCourses; ++i) adj[i] = new ArrayList<Integer>();
+
+        for (int[] edge : prerequisites) {
+            ++ indegrees[edge[0]];   //更新入度表
+            adj[edge[1]].add(edge[0]);  //更新邻接表数组
+        }
 
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; ++i) {
             if (indegrees[i] == 0) queue.add(i);   //入度为0 的 入队列
         }
+
         while (!queue.isEmpty()) {
             int top = queue.poll();
             -- numCourses;
-            for (int[] edge : prerequisites) {
-                if (edge[1] != top) continue;
-                if (-- indegrees[edge[0]] == 0) queue.add(edge[0]);
+            for (int w : adj[top]) { //遍历标号为top的指向的所有顶点的list,把它们的入度都-1
+                if (-- indegrees[w] == 0) queue.add(w);
             }
         }
         return numCourses == 0;
