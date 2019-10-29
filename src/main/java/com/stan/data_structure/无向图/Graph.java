@@ -1,4 +1,4 @@
-package com.stan.data_structure;
+package com.stan.data_structure.无向图;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,10 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+//无向图
 public class Graph {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/main/java/com/stan/data_structure/G.txt"));
+        Scanner scanner = new Scanner(new File("src/main/java/com/stan/data_structure/无向图/G.txt"));
         Graph G = new Graph(scanner);
         scanner.close();
         System.out.println(G);
@@ -51,7 +52,7 @@ public class Graph {
         return E;
     }
 
-    //向图中增加一条边 v-w
+    //向图中增加一条边 v-w， （加在前面）
     void addEdge(int v, int w) {
         adj[v].add(0,w);
         adj[w].add(0,v);
