@@ -24,6 +24,7 @@ public class _207课程表 {
 
         int n = numCourses;
 
+        //构建有向图
         Digraph G = new Digraph(n, prerequisites);
 
         onStack = new boolean[G.V()];
@@ -36,6 +37,7 @@ public class _207课程表 {
         return !hasCycle();
     }
 
+    //深度遍历，过程中判断是否有环
     private void dfs(Digraph G, int v) {
 
         onStack[v] = true;
@@ -55,13 +57,13 @@ public class _207课程表 {
         onStack[v] = false;  //若存在环，一定是被改回false前就有某个顶点指向了自己
     }
 
-
+    //是否有环
     public boolean hasCycle() {
         return cycle != null;
     }
 }
 
-
+//有向图类
 class Digraph {
 
     private final int V;   //顶点数
