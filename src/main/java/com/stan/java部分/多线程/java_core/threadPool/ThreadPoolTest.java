@@ -1,34 +1,65 @@
-package com.stan.java部分.多线程.java_core.future;
+package com.stan.java部分.多线程.java_core.threadPool;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
-public class MatchCounter implements Callable<Integer> {
+
+
+//之前FutureTest中，产生了大量生命周期很短的线程，这里用线程池
+public class ThreadPoolTest {
+
+    public static void main(String[] args) {
+
+        try (Scanner scanner = new Scanner(System.in)) {
+
+            System.out.print("Enter base dir: ");
+            String dir = scanner.nextLine();
+            System.out.print("enter keyword: ");
+            String keyword = scanner.nextLine();
+
+            ExecutorService pool = Executors.newCachedThreadPool();
+            MatchCounter counter = new MatchCounter(new File(dir), keyword, pool);
+            Future<Integer> result = pool.submit(counter);  //丢进线程池
+
+            try {
+                System.out.println(result.get() + " matching files");
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+
+            }
+            pool.shutdown();
+            int largestPoolSize = ((ThreadPoolExecutor) pool).getLargestPoolSize();
+            System.out.println("largest pool size = " + largestPoolSize);
+
+
+        }
+    }
+}
+
+
+class MatchCounter implements Callable<Integer> {
 
     private File dir;    //目录路径
     private String keyword;   //关键字
 
-    public MatchCounter(File dir, String keyword) {
+    private ExecutorService pool;   //线程池
+    private int cnt;
+
+    public MatchCounter(File dir, String keyword, ExecutorService pool) {
         this.dir = dir;
         this.keyword = keyword;
+        this.pool = pool;
     }
 
 
     @Override
-    /**
-     * 碰到文件夹就新起一个线程去统计
-     *
-     * 而不是像传统递归方式，碰到文件夹就递归进去找
-     */
     public Integer call(){
-        int cnt = 0;
+        cnt = 0;
         try {
             File[] files = dir.listFiles();  //获取目标目录下的所有文件和文件夹
 //            System.out.println(files.length);
@@ -38,11 +69,10 @@ public class MatchCounter implements Callable<Integer> {
             for (File file : files) {
                 if (file.isDirectory()) {
                     //是文件夹，新起一个线程去搜索
-                    MatchCounter counter = new MatchCounter(file, keyword);
-                    FutureTask<Integer> task = new FutureTask<>(counter);
-                    results.add(task);
-                    Thread t = new Thread(task);
-                    t.start();    //start最后会调用这个call方法，有点像递归
+                    MatchCounter counter = new MatchCounter(file, keyword, pool);
+                    Future<Integer> result = pool.submit(counter);
+                    results.add(result);
+
                 } else {
                     if (search(file)) ++ cnt;
                 }
