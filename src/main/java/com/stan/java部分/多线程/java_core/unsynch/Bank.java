@@ -25,7 +25,8 @@ public class Bank {
 
         bankLock.lock();
         try {
-            while (accounts[from] < amount) sufficientFunds.await();  //
+            while (accounts[from] < amount)
+                sufficientFunds.await();  //进入等待，等待其他线程来signal当前线程， 同时并把锁释放了！！！这样其他线程才能从阻塞变回正常状态！！
             System.out.print(Thread.currentThread());
             accounts[from] -= amount;
             System.out.printf("   %10.2f from %d to %d", amount, from, to);
