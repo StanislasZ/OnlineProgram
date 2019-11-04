@@ -31,8 +31,6 @@ public class _815公交路线 {
         List<Integer> start = new ArrayList<>();  //包含起点的公交线路，即routes的某行
         List<Integer> terminal = new ArrayList<>(); //包含终点的公交线路，也是某行
 
-
-
         //遍历routes，填充start, terminal
         for (int i = 0; i < N; ++i) {
             if (binarySearch(routes[i], S)) start.add(i);
@@ -47,15 +45,10 @@ public class _815公交路线 {
         for (int i = 0; i < N; ++i) {
             for (int j = i + 1; j < N; ++j) {
                 if (hasCommonStation(routes[i], routes[j])) {
-                    //有公共站点的线路节点 之间 有一条无向边
-                    System.out.println(i + "和" + j + "有公共站点");
                     neighbor[i].add(j);
                     neighbor[j].add(i);
                 }
             }
-        }
-        for (int i = 0; i < neighbor.length; ++i) {
-            System.out.println(i + " 对应 " + neighbor[i]);
         }
 
         int res = Integer.MAX_VALUE;
@@ -68,7 +61,6 @@ public class _815公交路线 {
             int level_cnt = 1;
             int curr_cnt = 0;
 
-            System.out.println("从" + start_i + " 出发");
             Queue<Integer> queue = new LinkedList<>();
             boolean[] vis = new boolean[N];
             queue.add(start_i);
@@ -76,24 +68,16 @@ public class _815公交路线 {
             while (!queue.isEmpty()) {
                 int top = queue.poll();
                 if (terminal.contains(top)) {
-
-                    System.out.println("bingo");
-                    System.out.println("top = " + top);
                     curr_min = Math.min(curr_min, level);
                     break;
                 }
-
                 //top的邻接节点 入队列
                 for (int i : neighbor[top]) {
                     if (!vis[i]) {
                         queue.add(i);
                         vis[i] = true;
-                        //System.out.println(i + "入队列");
                     }
-
                 }
-
-
                 if (++curr_cnt == level_cnt) {
                     ++ level;
                     level_cnt = queue.size();
@@ -101,7 +85,6 @@ public class _815公交路线 {
                 }
             }
             res = Math.min(res, curr_min);
-
         }
 
         return res == Integer.MAX_VALUE? -1 : res;
