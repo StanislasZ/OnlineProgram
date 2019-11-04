@@ -21,7 +21,7 @@ public class FutureTest {
             System.out.print("enter keyword: ");
             String keyword = scanner.nextLine();
 
-            com.stan.java部分.多线程.java_core.threadPool.MatchCounter counter = new com.stan.java部分.多线程.java_core.threadPool.MatchCounter(new File(dir), keyword);
+            MatchCounter counter = new MatchCounter(new File(dir), keyword);
             FutureTask<Integer> task = new FutureTask<>(counter);
             Thread t = new Thread(task);
             t.start();
@@ -64,7 +64,7 @@ class MatchCounter implements Callable<Integer> {
             for (File file : files) {
                 if (file.isDirectory()) {
                     //是文件夹，新起一个线程去搜索
-                    com.stan.java部分.多线程.java_core.threadPool.MatchCounter counter = new com.stan.java部分.多线程.java_core.threadPool.MatchCounter(file, keyword);
+                    MatchCounter counter = new MatchCounter(file, keyword);
                     FutureTask<Integer> task = new FutureTask<>(counter);
                     results.add(task);
                     Thread t = new Thread(task);
