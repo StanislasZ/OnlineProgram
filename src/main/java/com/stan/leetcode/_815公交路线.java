@@ -3,6 +3,13 @@ package com.stan.leetcode;
 import java.util.*;
 import java.awt.Point;
 
+
+/*
+    无向图
+    邻接表数组
+    bfs
+ */
+
 public class _815公交路线 {
 
     public static void main(String[] args) {
