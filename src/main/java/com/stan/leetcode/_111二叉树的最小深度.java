@@ -19,4 +19,16 @@ class Solution_111 {
         if (left == 0 || right == 0) return 1 + left + right;
         else return 1 + Math.min(left, right);
     }
+
+
+    public int minDepth2(TreeNode root) {
+        if (root == null) return 0;
+
+        if (root.left == null)    //左儿子为空，那叶子节点只能向右去找了吧
+            return 1 + minDepth2(root.right);
+        else if (root.right == null )
+            return 1 + minDepth2(root.left);
+        else
+            return 1 + Math.min(minDepth2(root.left), minDepth2(root.right));
+    }
 }
