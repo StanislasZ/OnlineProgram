@@ -28,6 +28,14 @@ public class _218天际线问题 {
      *
      * TreeMap以key（高度）逆序排序，通过map.keySet().iterator().next()就能拿到最大高度
      *
+     *
+     * 为了在正确的时候把last加入到res
+     * 引入变量 pre_x : 遍历curr_list时，上一个坐标的x
+     *          submit: last是否可提交
+     * 通过比较 遍历时当前坐标 和 pre_x ，可以知道x是不是已经变了
+     * 通过查看submit标志，可以知道last是否被提交过
+     *
+     *
      * @param buildings
      * @return
      */
@@ -40,22 +48,22 @@ public class _218天际线问题 {
             coor_list.add(new Coordinate(building[0], building[2], 1));
             coor_list.add(new Coordinate(building[1], building[2], 2));
         }
-        // 2. 列表排序
+        // 2. 列表排序, order by x, flag
         Collections.sort(coor_list, Comparator.comparingInt(Coordinate::getX)
                                     .thenComparingInt(Coordinate::getFlag)
                                     );
 
-        //优先队列, 按高度逆序
+        //优先队列, order by height desc
         Queue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(x -> -x));
         pq.add(0);
-        //高度计数器
+        //字典，查某个高度已经累积了几次，因为要考虑多个建筑物相同高度的情况
         Map<Integer, Integer> height_counter  = new HashMap<>();
 
         //上一次改变点的x, y
         int last_x = 0;
         int last_y = 0;
 
-        int pre_x = 0;  //遍历coor_list时，上一个坐标的横坐标
+        int pre_x = 0;  //遍历coor_list时，上一个坐标的横坐标，
         boolean submit = false;
 
         // 3. 遍历列表
