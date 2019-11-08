@@ -14,7 +14,8 @@ public class _218天际线问题 {
     public static void main(String[] args) {
 
         int[][] buildings = new int[][]{{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24, 8}};
-        System.out.println(new _218天际线问题().getSkyline(buildings));
+//        int[][] buildings = new int[][]{{1,2,1},{1,2,2},{1,2,3}};
+        System.out.println(new _218天际线问题().getSkyline_PQ(buildings));
     }
 
 
@@ -22,11 +23,16 @@ public class _218天际线问题 {
 
 
     /**
-     * 用优先队列尝试
+     * 用优先队列尝试， 击败 45%
+     * 发现pq里塞高度，还是需要一个map来查每个高度的次数，还不如直接TreeMap
+     *
+     * TreeMap以key（高度）逆序排序，通过map.keySet().iterator().next()就能拿到最大高度
+     *
      * @param buildings
      * @return
      */
     public List<List<Integer>> getSkyline_PQ(int[][] buildings) {
+        if (buildings.length == 0) return res;
 
         // 1. 坐标入列表
         List<Coordinate> coor_list = new ArrayList<>();
@@ -35,21 +41,63 @@ public class _218天际线问题 {
             coor_list.add(new Coordinate(building[1], building[2], 2));
         }
         // 2. 列表排序
-        Collections.sort(coor_list, Comparator.comparingInt(Coordinate::getX).thenComparingInt(Coordinate::getFlag));
+        Collections.sort(coor_list, Comparator.comparingInt(Coordinate::getX)
+                                    .thenComparingInt(Coordinate::getFlag)
+                                    );
 
-        System.out.println(coor_list);
+        //优先队列, 按高度逆序
+        Queue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(x -> -x));
+        pq.add(0);
+        //高度计数器
+        Map<Integer, Integer> height_counter  = new HashMap<>();
 
-        //优先队列
-        Queue<Height> pq = new PriorityQueue<>(Comparator.comparingInt(Height::getHeight));
+        //上一次改变点的x, y
+        int last_x = 0;
+        int last_y = 0;
 
+        int pre_x = 0;  //遍历coor_list时，上一个坐标的横坐标
+        boolean submit = false;
 
         // 3. 遍历列表
         for (Coordinate c : coor_list) {
 
-            //todo
-        }
+            //只有当横坐标变了，且flag = true才可以加入到res中
+            //如果横坐标没有变，那么同一个x还可能碰到更大的y
+            //如果flag = false, 说明要加到结果的点信息还没有变化，不加这个条件会出现重复
+            if (c.x != pre_x && submit) {
+                res.add(Arrays.asList(last_x, last_y));
+                submit = false;
+            }
+            pre_x = c.x;
 
-        return null;
+            int cnt = height_counter.getOrDefault(c.y, 0);
+
+            if (c.flag == 1) {
+                //建筑左侧x
+                height_counter.put(c.y, cnt + 1);
+                if (!pq.contains(c.y)) pq.add(c.y);
+            } else {
+                //建筑右侧x
+                //如果为1， 这个高度下来了，消失了
+                if (cnt == 1) {
+                    height_counter.remove(c.y);
+                    pq.remove(c.y);
+                }
+                else {
+                    if (!pq.contains(c.y)) pq.add(c.y);
+                    height_counter.put(c.y, cnt - 1);   //这里不需要写成 else if (cnt >= 2) 因为这是右侧x，一定是先操作过左边x，再来操作右边x， cnt一定 >= 1
+                }
+            }
+            if (pq.peek() != last_y) {
+                //高度变了，更新last的x,y 但修改后不可以马上就加到res
+                last_x = c.x;
+                last_y = pq.peek();
+                submit = true;
+            }
+        }
+        //补最后一个
+        res.add(Arrays.asList(coor_list.get(coor_list.size() - 1).x, 0));
+        return res;
 
     }
 
@@ -179,39 +227,5 @@ class Coordinate {
 
     public void setFlag(int flag) {
         this.flag = flag;
-    }
-}
-
-class Height {
-    int height;
-    int cnt;
-
-    public Height(int height, int cnt) {
-        this.height = height;
-        this.cnt = cnt;
-    }
-
-    @Override
-    public String toString() {
-        return "Height{" +
-                "height=" + height +
-                ", cnt=" + cnt +
-                '}';
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
     }
 }
