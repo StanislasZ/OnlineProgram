@@ -1,5 +1,7 @@
-package com.stan.java部分.多线程.gitbook.java_basic_introduction;
+package com.stan.java部分.多线程.gitbook.java_basic_introduction.join;
 
+
+//线程插队
 public class JoinTest {
 
 
