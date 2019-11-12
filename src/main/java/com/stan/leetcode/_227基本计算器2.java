@@ -10,6 +10,54 @@ public class _227基本计算器2 {
     public static void main(String[] args) {
         System.out.println(new _227基本计算器2().calculate("1-1"));
     }
+
+
+    /**
+     * 评论区最短的
+     *
+     * 有空再看看
+     *
+     *
+     * @param s
+     * @return
+     */
+    public int calculate2(String s) {
+
+        int res = 0, d = 0;
+        char sign = '+';
+        Stack<Integer> nums = new Stack<>();
+        for (int i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) > '0') d = d * 10 + s.charAt(i) - '0';
+
+            if ((s.charAt(i) < '0' && s.charAt(i) != ' ') || i == s.length() - 1) {
+                if (sign == '+') nums.push(d);
+                else if (sign == '-') nums.push(-d);
+                else if (sign == '*' || sign == '/') {
+                    int temp = sign == '*'?
+                            nums.peek() * d
+                            : nums.peek() / d;
+                    nums.pop();
+                    nums.push(temp);
+                }
+                sign = s.charAt(i);
+                d = 0;
+            }
+        }
+
+        while (!nums.isEmpty()) {
+            res += nums.pop();
+        }
+        return res;
+
+    }
+
+
+
+    /**
+     * 击败5%  呵呵
+     * @param s
+     * @return
+     */
     public int calculate(String s) {
 
         s = s.replace(" ","");
