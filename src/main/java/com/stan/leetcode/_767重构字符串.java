@@ -14,8 +14,7 @@ public class _767重构字符串 {
     public String reorganizeString(String S) {
         //整理好各个字母对应出现的频率
         int[] counts = new int[26];
-        for (int i = 0; i < S.length(); i++) counts[S.charAt(i) - 'a']++;
-
+        for (char c : S.toCharArray()) ++ counts[c - 'a'];
         Queue<Letter> pq = new PriorityQueue<>(26, Comparator.comparingInt(Letter::getCnt).reversed());
 
 
