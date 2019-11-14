@@ -36,7 +36,8 @@ public class RedisDelayingQueue<T> {
         task.msg = msg;
         String s = JSON.toJSONString(task);
         System.out.println("s = " + s);
-        //塞入延时队列， 5s后再试
+        //塞入延时队列， 5s后add
+        //效果就是一开始消费者拿数据，拿到的set为空，5s后才有数据
         jedis.zadd(queueKey, System.currentTimeMillis() + 5000, s);
     }
 
@@ -50,6 +51,7 @@ public class RedisDelayingQueue<T> {
                     System.out.println("set为空，sleep...");
                     Thread.sleep(500); //歇会
                 } catch (InterruptedException e) {
+                    System.out.println("捕获InterruptedException， 跳出while");
                     break;
                 }
                 continue;
@@ -85,6 +87,8 @@ public class RedisDelayingQueue<T> {
         consumer.start();
         try {
             producer.join();
+            System.out.println("producer 跑完...");
+            //等producer run方法结束，继续执行
             Thread.sleep(6000);
             consumer.interrupt();
             consumer.join();
