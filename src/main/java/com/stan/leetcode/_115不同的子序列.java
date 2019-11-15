@@ -11,6 +11,42 @@ public class _115不同的子序列 {
 
     }
 
+    /**
+     * dp一维解法
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public int numDistinct3(String s, String t) {
+
+        int sLen = s.length();
+        int tLen = t.length();
+        int[] dp = new int[sLen + 1];
+        for (int i = 0; i <= sLen; i++) dp[i] = 1; //也就是用二维解法时，最右边那列全是1
+
+        //t逆序
+        for (int j = tLen - 1; j >= 0; -- j) {
+            //原来二维中，需要加右下角的值，直接拿就行
+            //现在变成迭代这个变量
+            int pre = dp[sLen];   //从二维看，一开始pre是右边那列最下面那个值
+            dp[sLen] = 0;  //从二维看，操作某列（除了最右边那列）时，最下面的值是0
+
+            //s逆序
+            for (int i = sLen - 1; i >= 0; -- i) {
+                //dp[i]上次刷了后，对应的值 ，从二维看， 就是dp[i][j+1]的值
+                //因为之后要修改dp[i]，先备份
+                int temp = dp[i];
+                if (t.charAt(j) == s.charAt(i))
+                    dp[i] = dp[i + 1] + pre;    //这个 = 下面 + 右下角
+                else
+                    dp[i] = dp[i + 1];
+                pre = temp;  //更新成下一次需要的右下角的值
+            }
+        }
+        return dp[0];
+    }
+
 
     /**
      * dp[i][j] 为 s[i,end] 变化到 t[j][end] 有几种
