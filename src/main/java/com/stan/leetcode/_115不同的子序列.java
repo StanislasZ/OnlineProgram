@@ -12,7 +12,15 @@ public class _115不同的子序列 {
     }
 
     /**
-     * dp一维解法
+     * dp一维解法 击败90%
+     * 逆序， t长度时几，就刷几次
+     *
+     * 二维时： 对于某一个格 dp[i][j] 最多需要 2个值  dp[i + 1][j + 1] 和 dp[i + 1][j]
+     *
+     *      1) 对于dp[i + 1][j] 很简单，同一列，变成一维后  就是dp[i]和dp[i+1]
+     *
+     *      2) 对于dp[i + 1][j + 1]，就是右下角，所以对于这个值，在刷的时候要做好backup，并在内循环中维护它
+     *
      *
      * @param s
      * @param t
@@ -22,26 +30,29 @@ public class _115不同的子序列 {
 
         int sLen = s.length();
         int tLen = t.length();
+
         int[] dp = new int[sLen + 1];
-        for (int i = 0; i <= sLen; i++) dp[i] = 1; //也就是用二维解法时，最右边那列全是1
 
-        //t逆序
-        for (int j = tLen - 1; j >= 0; -- j) {
-            //原来二维中，需要加右下角的值，直接拿就行
-            //现在变成迭代这个变量
-            int pre = dp[sLen];   //从二维看，一开始pre是右边那列最下面那个值
-            dp[sLen] = 0;  //从二维看，操作某列（除了最右边那列）时，最下面的值是0
+        Arrays.fill(dp, 1);  //二维时，最右边那列 1
 
-            //s逆序
-            for (int i = sLen - 1; i >= 0; -- i) {
-                //dp[i]上次刷了后，对应的值 ，从二维看， 就是dp[i][j+1]的值
-                //因为之后要修改dp[i]，先备份
-                int temp = dp[i];
-                if (t.charAt(j) == s.charAt(i))
-                    dp[i] = dp[i + 1] + pre;    //这个 = 下面 + 右下角
-                else
+        for (int j = tLen - 1; j >= 0; --j) {
+
+            int i = sLen;
+            int rightDown = dp[i];   //备份出来， 内循环也要不停维护这个变量
+
+            //防止内循环数组越界，dp[sLen]要在这里初始化
+            dp[i] = 0;  //除了最左边那列，dp[sLen][除了tLen] = 0
+
+            for (--i ; i >= 0; --i) {
+
+                int currRight = dp[i];  //本次i的right，就是下一个i的rightDown
+                if (s.charAt(i) == t.charAt(j)) {
+                    //一样，可以从2个方向转移而来
+                    dp[i] = rightDown + dp[i + 1];
+                } else {
                     dp[i] = dp[i + 1];
-                pre = temp;  //更新成下一次需要的右下角的值
+                }
+                rightDown = currRight;
             }
         }
         return dp[0];
