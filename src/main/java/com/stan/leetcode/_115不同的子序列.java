@@ -1,8 +1,17 @@
 package com.stan.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class _115不同的子序列 {
+
+    /*
+        用了一维dp  二维dp   dfs   带记忆化的dfs
+
+        好题
+     */
+
 
     public static void main(String[] args) {
 
@@ -10,6 +19,123 @@ public class _115不同的子序列 {
         String t = "rwmimatmhydhbujebqehjprrwfkoebcxxqfktayaaeheys";
 
     }
+
+
+    int[][] record;
+
+    /**
+     * 带记忆化的dfs
+     * 用二维数组来读，存， 读写都是O(1)，应好于Map的O(logn)
+     *
+     * 击败 59%
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public int numDistinct_dfs_memory_by_array(String s, String t) {
+
+
+        record = new int[s.length()][t.length()];
+        for (int i = 0; i < s.length(); ++i) for (int j = 0; j < t.length(); ++j)
+            record[i][j] = -1;
+        return getCnt(s, t, 0, 0);
+
+    }
+    private int getCnt3(String s, String t, int i, int j) {
+
+        //递归终点
+        if (j == t.length()) return 1;
+        if (i == s.length()) return 0;
+
+
+        if (record[i][j] > -1) return record[i][j];
+
+        int cnt = 0;
+        if (s.charAt(i) == t.charAt(j)) {
+            cnt = getCnt3(s, t, i + 1, j + 1) + getCnt3(s, t, i + 1, j);
+        } else {
+            cnt = getCnt3(s, t, i + 1, j);
+        }
+
+        record[i][j] = cnt;
+        return cnt;
+    }
+
+
+    Map<String, Integer> map;
+
+    /**
+     * 带记忆的dfs
+     * 用HashMap来存，读
+     * 击败 5%
+     * @param s
+     * @param t
+     * @return
+     */
+    public int numDistinct_dfs_memory_by_map(String s, String t) {
+
+        map = new HashMap<>();
+        return getCnt2(s, t, 0, 0);
+    }
+
+    private int getCnt2(String s, String t, int i, int j) {
+
+        //递归终点
+        if (j == t.length()) return 1;
+        if (i == s.length()) return 0;
+
+        //get result from map
+        String key = i + "@" + j;
+
+        if (map.containsKey(key)) return map.get(key);
+
+
+        int cnt = 0;
+        if (s.charAt(i) == t.charAt(j)) {
+            cnt = getCnt2(s, t, i + 1, j + 1) + getCnt2(s, t, i + 1, j);
+        } else {
+            cnt = getCnt2(s, t, i + 1, j);
+        }
+
+        map.put(key, cnt);
+        // map[i][j] = cnt;
+        return cnt;
+
+    }
+
+
+
+    //dfs
+    public int numDistinct_dfs(String s, String t) {
+
+        return getCnt(s, t, 0, 0);
+    }
+
+    /**
+     * 不带记忆的dfs，很慢，超时
+     * @param s
+     * @param t
+     * @param i
+     * @param j
+     * @return
+     */
+    private int getCnt(String s, String t, int i, int j) {
+
+        //递归终点
+        if (j == t.length()) return 1;
+        if (i == s.length()) return 0;
+
+        int cnt = 0;
+        if (s.charAt(i) == t.charAt(j)) {
+            cnt = getCnt(s, t, i + 1, j + 1) + getCnt(s, t, i + 1, j);
+        } else {
+            cnt = getCnt(s, t, i + 1, j);
+        }
+        return cnt;
+
+    }
+
 
     /**
      * dp一维解法 击败90%
