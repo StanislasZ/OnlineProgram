@@ -1,9 +1,6 @@
 package com.stan.leetcode;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class _127单词接龙 {
 
@@ -45,7 +42,11 @@ public class _127单词接龙 {
 
     public static void main(String[] args) {
 
+        String beginWord = "cog";
+        String endWord = "cog";
+        List<String> wordList = Arrays.asList("hot","dot","dog","lot","log","cog");
 
+        System.out.println(new _127单词接龙().ladderLength(beginWord, endWord, wordList));
 
 
     }
@@ -53,6 +54,17 @@ public class _127单词接龙 {
     /**
      * 递归 <100ms
      * bfs -> 双端bfs -> 临近点查找方式
+     *
+     *
+     *
+     * start = [hit],       end = [cog],        dict = [lot, log, dot, cog, hot, dog]
+     * start = [hot],       end = [cog],        dict = [lot, log, dot, cog, hot, dog]
+     * start = [lot, dot],  end = [cog],        dict = [lot, log, dot, cog, dog]
+     * start = [cog],       end = [lot, dot],   dict = [lot, log, dot, cog, dog]
+     * start = [log, dog],  end = [lot, dot],   dict = [lot, log, dot, dog]
+     *
+     *
+     *
      * @param beginWord
      * @param endWord
      * @param wordList
@@ -60,53 +72,56 @@ public class _127单词接龙 {
      */
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
 
-        if (wordList == null || wordList.size() == 0) return 0;
-        //起点
-        Set<String> start = new HashSet<>();
-        //终点
-        Set<String> end = new HashSet<>();
-        //方法参数 list -> hashset
+        Set<String> from = new HashSet<>();
+        Set<String> to   = new HashSet<>();
         Set<String> dict = new HashSet<>(wordList);
-        start.add(beginWord);
-        end.add(endWord);
-        if (! dict.contains(endWord)) return 0;
-        return bfs(start, end, dict, 2);
+
+        from.add(beginWord);
+        to.add(endWord);
+
+        if (!dict.contains(endWord)) return 0;
+        return bfs(from, to, dict, 2);
     }
 
-    public int bfs(Set<String> start, Set<String> end, Set<String> dict, int cnt) {
-        //双端查找，若任意一段出现断裂，则不存在
-        if (start.size() == 0) return 0;
-        //优化：用少的去找多的
-        if (start.size() > end.size()) return bfs(end, start, dict, cnt);
+    public int bfs(Set<String> from, Set<String> to, Set<String> dict, int cnt) {
 
-        //bfs标记行为：只能用一次
-        dict.removeAll(start);
-        //收集下一层临近点
-        Set<String> next = new HashSet<>();
-        for (String s : start) {
+        //递归终点
+        if (from.isEmpty()) return 0;   //断裂了，找不到
+        if (from.size() > to.size()) return bfs(to, from, dict, cnt);  //从少的去找多的，不然类似于邻接表太大
+
+        dict.removeAll(from);  //对应 队列写法中 节点用过的要标记vis = true 就不能再用了
+
+        Set<String> next_layer = new HashSet<>();
+
+        for (String s : from) {
             char[] arr = s.toCharArray();
             for (int i = 0; i < arr.length; ++i) {
-                char tmp = arr[i];
-                //变化
-                for (char c = 'a'; c <= 'z'; ++c) {
-                    if (tmp == c) continue;
+                char curr = arr[i];
+                for (char c = 'a'; c <= 'z'; ++ c) {
+                    if (curr == c) continue;
                     arr[i] = c;
-                    String next_str = new String(arr);
-                    if (dict.contains(next_str)) {
-                        if (end.contains(next_str)) return cnt;
-                        else next.add(next_str);
+                    String newWord = new String(arr);
+
+                    if (dict.contains(newWord)) {
+                        if (to.contains(newWord)) return cnt;
+                        next_layer.add(newWord);
                     }
                 }
-                //复原
-                arr[i] = tmp;
+                arr[i] = curr;  //改回去
             }
         }
-        return bfs(next, end, dict, cnt + 1);
+        return bfs(next_layer, to, dict, cnt + 1);
     }
 
 
     /**
-     * 优先队列,500ms
+     * bfs的优先队列写法,500ms
+     *
+     * 上面的递归写法，可以很自如地在 搜索过程中 转换 from 和 to , 即转换搜索方向
+     *
+     * 这里用队列，暂时没想到怎么转换方向，肯定比较复杂
+     *
+     *
      * @param beginWord
      * @param endWord
      * @param wordList
@@ -114,7 +129,7 @@ public class _127单词接龙 {
      */
     public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
         boolean[] vis = new boolean[wordList.size()];
-        PriorityQueue<MyNode> pq = new PriorityQueue<>();
+        PriorityQueue<MyNode> pq = new PriorityQueue<>(Comparator.comparingInt(MyNode::getStep));
         pq.add(new MyNode(1, beginWord));
         while (!pq.isEmpty()) {
             MyNode curr = pq.poll();
@@ -139,7 +154,7 @@ public class _127单词接龙 {
 
 }
 
-class MyNode implements Comparable<MyNode>{
+class MyNode {
     int step;
     String str;
     public MyNode(int step, String str) {
@@ -147,9 +162,7 @@ class MyNode implements Comparable<MyNode>{
         this.str = str;
     }
 
-
-    @Override
-    public int compareTo(MyNode o) {
-        return this.step - o.step;
+    public int getStep() {
+        return step;
     }
 }
