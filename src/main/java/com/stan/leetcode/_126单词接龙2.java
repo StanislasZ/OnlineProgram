@@ -21,8 +21,8 @@ public class _126单词接龙2 {
         if(!dicts.contains(endWord)) return res;
         if(dicts.contains(beginWord)) dicts.remove(beginWord);
         //bfs搜索最短路径所用的开始和结束的字典
-        Set<String> endList = new HashSet<>(),
-                beginList = new HashSet<>();
+        Set<String> endList = new HashSet<>();
+        Set<String> beginList = new HashSet<>();
 
 
         beginList.add(beginWord);
@@ -40,27 +40,31 @@ public class _126单词接龙2 {
     /**
      * bfs完成了邻接map的数据填充
      *
+     * 用dfs慢慢找出起点到终点的所有路就行了
      *
      * @param subList
      * @param beginWord
      * @param endWord
      */
     private void dfs(List<String> subList, String beginWord, String endWord) {
+        //递归终点
         if (beginWord.equals(endWord)) {
             res.add(new ArrayList<>(subList));
             return;
         }
         if (!map.containsKey(beginWord)) return;
 
+
         for (String word : map.get(beginWord)) {
             subList.add(word);
             dfs(subList, word, endWord);
-            subList.remove(subList.size() - 1);
+            subList.remove(subList.size() - 1);  //回溯
         }
     }
 
     /**
-     * 因为需要在最后直到每个方案的具体路径，这里需要辅助变量reverse
+     * 因为过程中搜索方向会改变，这里需要辅助变量reverse，不然不知道 谁 指向 谁
+     *
      * @param map
      * @param from
      * @param to
