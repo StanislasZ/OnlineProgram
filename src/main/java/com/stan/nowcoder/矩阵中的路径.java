@@ -2,10 +2,10 @@ package com.stan.nowcoder;
 
 public class 矩阵中的路径 {
     public static void main(String[] args) {
-        String res = "ABCESFCSADEE";
+        String res = "a";
         char[] matrix = res.toCharArray();
-        int rows = 3, cols = 4;
-        String pattern = "ABCCED";
+        int rows = 1, cols = 1;
+        String pattern = "ab";
         char[] str = pattern.toCharArray();
 
         System.out.println(new Solution_矩阵中的路径().hasPath(matrix, rows, cols, str));
