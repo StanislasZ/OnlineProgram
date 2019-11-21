@@ -1,5 +1,7 @@
 package com.stan.leetcode;
 
+
+//和687类似
 public class _124二叉树的最大路径和 {
 
 

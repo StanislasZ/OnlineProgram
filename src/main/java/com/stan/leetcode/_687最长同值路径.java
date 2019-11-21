@@ -1,5 +1,8 @@
 package com.stan.leetcode;
 
+
+//和124类似
+
 public class _687最长同值路径 {
 
 
