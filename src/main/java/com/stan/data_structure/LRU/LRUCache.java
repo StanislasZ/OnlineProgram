@@ -4,7 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 //leetcode146
+//方法1： 继承LinkedHashMap
 public class LRUCache extends LinkedHashMap<Integer, Integer> {
+
     private int capacity;
 
     //调父类构造器
@@ -38,6 +40,18 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
     /**
      * 重写该方法后，当实际键值对个数超过容量时， 在put后会触发删除最老Entry，以实现LRU
+     *
+     * afterNodeInsertion这个方法在 HashMap就有定义，方法体为空， put操作的最后会调用该方法
+     * HashMap的put里的afterNodeInsertion相当于没用，因为是空方法
+     *
+     *
+     * 疑问： 为什么要这样设计？？
+     * 猜想： 可能是为了保证put可以直接继承
+     *
+     * LinkedHashMap添加了具体内容。     *
+     * 所以 LinkedHashMap的put操作的最后 才会有afterNodeInsertion的效果
+     *
+     *
      * @param eldest
      * @return
      */
