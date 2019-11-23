@@ -3,6 +3,10 @@ package com.stan.leetcode;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/**
+ * HashSet
+ */
 public class _128最长连续序列 {
 
 
