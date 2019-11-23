@@ -71,6 +71,7 @@ class Solution_206 {
 
 
     //头插法
+    //leetcode143写法有点不同
     public ListNode reverseList_loop2(ListNode head) {
         if (head == null) return head;
         ListNode dummy = new ListNode(0);
