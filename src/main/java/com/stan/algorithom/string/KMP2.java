@@ -8,7 +8,10 @@ import java.util.Set;
  * 参考leetcode一个人的解释
  * 原理是算法红书里的状态机，用dp表达
  *
- * dp[i][j]
+ *
+ * 参考链接：https://leetcode-cn.com/problems/implement-strstr/solution/kmp-suan-fa-xiang-jie-by-labuladong/
+ *
+ *  dp[i][j]
  *      i代表第几个状态
  *      j代表遇到的字符(ascii码)
  *      dp[i][j] 为 第i个状态时，碰到j这个字符，要去哪个状态
