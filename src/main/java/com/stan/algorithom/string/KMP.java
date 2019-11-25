@@ -40,7 +40,7 @@ public class KMP {
             }
         }
         System.out.println("**");
-        for (int ele : next) System.out.println(ele);
+        for (int p = 0; p < next.length; ++p) System.out.println("next[" + p + "] = " + next[p]);
         System.out.println("**");
     }
 
