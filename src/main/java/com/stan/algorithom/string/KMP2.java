@@ -76,11 +76,6 @@ public class KMP2 {
             X = dp[X][pattern.charAt(j)];
 //            System.out.println("    X = " + X);
         }
-
-
-
-
-
     }
 
     public int search(String txt) {

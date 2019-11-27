@@ -22,7 +22,7 @@ public class _47全排列2 {
     public void dfs(int[] nums, boolean[] vis) {
         //递归终点
         if (temp.size() == nums.length) {
-            rlt.add(new ArrayList<Integer>(temp));
+            rlt.add(new ArrayList<>(temp));
             return;
         }
 
