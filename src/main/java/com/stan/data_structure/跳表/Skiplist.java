@@ -148,6 +148,7 @@ public class Skiplist {
 
         int level = 1;
         while (RandomGenerator.getRandomBoolean(0.5f)) {
+            //50%的可能进入
 
             if (level > this.levels) createEmptyLevel();  //已经在最上面的链表，还要往上弄，就整一条新的
 
