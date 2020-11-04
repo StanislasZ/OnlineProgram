@@ -59,36 +59,24 @@ public class 两数相加 {
 
     public  static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        ListNode dummyHead = new ListNode(0);
-        ListNode p=l1, q=l2;
-        ListNode curr=dummyHead;
+        ListNode dummy = new ListNode(0);
+        ListNode h1 = l1, h2 = l2;
+        ListNode curr = dummy;
+        int carry = 0;
 
-        System.out.println(curr);
-        System.out.println(dummyHead);
-
-        int carry=0;
-
-        while(p!=null||q!=null){
-            int x= (p==null)?0:p.val;
-            int y= (q==null)?0:q.val;
-            int sum=x+y+carry;
-
-            carry=sum/10;
-            curr.next=new ListNode(sum%10);
-            System.out.println("---- "+curr);
-            System.out.println("----"+dummyHead);
-            curr=curr.next;
-            if(p!=null) p=p.next;
-            if(q!=null) q=q.next;
-
-
+        while (h1 != null || h2 != null) {
+            int n1 = h1 == null? 0 : h1.val;
+            int n2 = h2 == null? 0 : h2.val;
+            int sum = n1 + n2 + carry;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            //迭代
+            if (h1 != null) h1 = h1.next;
+            if (h2 != null) h2 = h2.next;
+            curr = curr.next;
         }
-
-        if(carry!=0){   //最后有个进位
-            curr.next=new ListNode(carry);
-        }
-
-        return dummyHead.next;
+        if (carry != 0) curr.next = new ListNode(1);
+        return dummy.next;
     }
 
 }
