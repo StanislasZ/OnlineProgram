@@ -28,6 +28,6 @@ public class _1两数之和 {
             if (map.containsKey(remain)) return new int[]{i, map.get(remain)};
             map.put(nums[i], i);
         }
-        throw new IllegalArgumentException("No two sum solution");
+        throw new IllegalArgumentException("No two sum solution");  //抛出异常
     }
 }
